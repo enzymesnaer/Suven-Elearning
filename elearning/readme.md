@@ -1,9 +1,6 @@
 ## suvenelearning.sql 
 sql dump file from the mysql database that can be used to create the tble structure
 
-## login.php 
-demo login page which gives login/register page depending on the cookies set on browser
-
 ## appconstants.php 
 contains all the constant related to application
 
