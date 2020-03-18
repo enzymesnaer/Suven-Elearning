@@ -1,0 +1,35 @@
+<!-- PayOut Modal -->
+<div class="modal" id="paymentModal">
+  <div class="modal-dialog modal-md">
+	<div class="modal-content">
+	  <div class="modal-header" style="padding: 0px;">
+		<ul class="nav nav-pills nav-justified">
+		  <li class="active"><a href="#login" data-toggle="pill">Course Payment</a></li>
+		</ul>
+	  </div>
+	  <div class="modal-body">
+
+		<!--<h3 class="text-center"><img src="images/sctpl_logo.png" height="32px" width="32px" /> Suven Consultants & Technology Pvt. Ltd.</h3><br>-->
+		<div class="tab-content" style="border:none;">
+		  <div id="login" class="tab-pane fade in active">
+			<!--<form name="loginForm" action="authentication.php" method="post" onsubmit="">-->
+			<form name="paymentForm" action="../payment/payment.php" method="post" onsubmit="alert('You will be now directed to payment page');">
+			  <input type="hidden" name="action" value="login" />
+			  <div class="form-group">
+				<input type="radio" id="ind_course" name="course_type" value="1001|3900" />
+				<label for ="ind_course">Machine Learning - Beginner (Rs.3900/-) </label>
+			  </div>
+			  <div class="form-group">
+				<input type="radio" id="grp_course" name="course_type" value="2001|27300"/>
+				<label for ="grp_course">Data Science Placement Track including </br> Machine Learning - Beginner  (Rs.27300/-)</label>
+			  </div>
+			  <div class="form-group">
+				<button type="submit" name="paynow" class="btn btn-success center-block">PayNow <span class="glyphicon glyphicon-log-in"></span></button>
+			  </div>
+			</form>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </div>
+</div>
