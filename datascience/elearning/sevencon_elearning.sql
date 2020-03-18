@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2020 at 10:01 AM
+-- Generation Time: Mar 18, 2020 at 08:43 AM
 -- Server version: 10.4.8-MariaDB
--- PHP Version: 7.3.11
+-- PHP Version: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,6 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `all_payment_transactions`
+--
+
+CREATE TABLE `all_payment_transactions` (
+  `txnid` varchar(50) NOT NULL,
+  `orderid` varchar(10) NOT NULL,
+  `txn_amount` float NOT NULL,
+  `payment_mode` varchar(10) NOT NULL,
+  `currency` varchar(5) NOT NULL,
+  `txn_date` datetime NOT NULL,
+  `status_code` varchar(20) NOT NULL,
+  `response_code` varchar(5) NOT NULL,
+  `response_msg` varchar(100) NOT NULL,
+  `gateway_name` varchar(200) NOT NULL,
+  `bank_txnid` varchar(50) NOT NULL,
+  `bank_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `course_table`
 --
 
@@ -40,7 +61,28 @@ CREATE TABLE `course_table` (
 --
 
 INSERT INTO `course_table` (`courseid`, `coursename`, `coursedescr`, `courseimg`) VALUES
-(1, 'Machine Learning Beginner', 'About Machine Learning Beginner Course', '/image/path/');
+(1001, 'Machine Learning Beginner', 'About Machine Learning Beginner Course', '/image/path/');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `discount_coupons`
+--
+
+CREATE TABLE `discount_coupons` (
+  `code` varchar(10) NOT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `percent` int(11) NOT NULL DEFAULT 0,
+  `valid_from` date NOT NULL,
+  `valid_to` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `discount_coupons`
+--
+
+INSERT INTO `discount_coupons` (`code`, `description`, `percent`, `valid_from`, `valid_to`) VALUES
+('efrte3434s', 'First  timer Bonus ', 23, '2019-01-01', '2020-12-31');
 
 -- --------------------------------------------------------
 
@@ -228,7 +270,30 @@ CREATE TABLE `users_table` (
 
 INSERT INTO `users_table` (`uid`, `name`, `username`, `contact`, `email`, `password`) VALUES
 (7, 'Snehar Manoj Koli', 'snehar16395@sctpl', 2147483647, 'snehar16395@gmail.com', '963.963.963.963.'),
-(8, 'SneharABC', 'abc@sctpl', 1231231231, 'abc@gmail.com', 'qwerty123');
+(8, 'SneharABC', 'abc@sctpl', 1231231231, 'abc@gmail.com', 'qwerty123'),
+(9, 'Pankaj Sharma', 'pankajs579@sctpl', 2147483647, 'pankajs579@gmail.com', 'qwertyuiop');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_course_orders`
+--
+
+CREATE TABLE `user_course_orders` (
+  `userid` int(100) NOT NULL,
+  `courseid` int(100) NOT NULL,
+  `orderid` varchar(10) NOT NULL,
+  `pct_discount` int(11) DEFAULT 0,
+  `status` varchar(10) NOT NULL DEFAULT 'PENDING'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_course_orders`
+--
+
+INSERT INTO `user_course_orders` (`userid`, `courseid`, `orderid`, `pct_discount`, `status`) VALUES
+(9, 1001, 'ORD9059776', 0, 'PENDING'),
+(9, 1001, 'ORD940235', 0, 'PENDING');
 
 --
 -- Indexes for dumped tables
@@ -280,7 +345,7 @@ ALTER TABLE `users_table`
 -- AUTO_INCREMENT for table `course_table`
 --
 ALTER TABLE `course_table`
-  MODIFY `courseid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `courseid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
 
 --
 -- AUTO_INCREMENT for table `enquiry_table`
@@ -304,7 +369,7 @@ ALTER TABLE `topics_table`
 -- AUTO_INCREMENT for table `users_table`
 --
 ALTER TABLE `users_table`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
