@@ -16,18 +16,43 @@ $courseId = 0;
 $userid=$_SESSION['uid'];
 
 
-if(isset($_POST['course_type'])){
-	list($courseId, $TXN_AMOUNT) = explode('|',$_POST['course_type']);
+if(isset($_POST['course']) && isset($_POST['hdAmt']) && isset($_POST['hdDisc'])){
+	$courseId   = $_POST['course'];
+	$TXN_AMOUNT = $_POST['hdAmt'];
+	$discount   = $_POST['hdDisc'];
 	//$TXN_AMOUNT = $_POST['course_type'];
 	require_once('paytmfunctions.php');
 
 	require '../dbconnect.php';
-    $add_cust_order = "insert into user_course_orders (userid,courseid,orderid) values ($userid,$courseId,'$ORDERID')";
-	if(mysqli_query($conn,$add_cust_order)){
-		echo "Customer order created ";
-		GenerateRedirectPage();
-	}else{
-		echo mysqli_error($conn);
+	
+	$query="select id from package_courses where courseid='$courseId'";
+	$resultset = mysqli_query($conn,$query);
+	
+	if(mysqli_num_rows($resultset) > 0) {
+	
+		$query="insert into user_course_orders(userid,courseid,orderid,pct_discount)
+								select '$userid',courseid,'$ORDERID',$discount
+									from package_courses
+								where id in 
+								(select id from package_courses 
+								 where courseid='$courseId')";
+								 
+		if(mysqli_query($conn,$query)){
+			echo "Customer order created ";
+			GenerateRedirectPage();
+		}else{
+			echo mysqli_error($conn);
+		}
+								 
+	}else{							 
+		$query = "insert into user_course_orders (userid,courseid,orderid,pct_discount) values ($userid,$courseId,'$ORDERID',$discount)";
+
+		if(mysqli_query($conn,$query)){
+			echo "Customer order created ";
+			GenerateRedirectPage();
+		}else{
+			echo mysqli_error($conn);
+		}		
 	}
 	
 }
