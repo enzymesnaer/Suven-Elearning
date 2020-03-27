@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+    
+  <style>
+  .indie{
+      font-family: 'Sen', sans-serif;
+  }
+  
+  html, body{
+      background-color:#FFF !important;
+  }
+    .lessons {
+    margin: -5%;
+    padding: 10%;
+    padding-left:30px;
+    }
+    
+    .selen {
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    padding: 45px;
+    padding-left: 70px;
+    padding-top: 0px !important;
+    margin-right: -73px;
+}
+    
+    ol {
+    font-weight: bolder;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.subhr {
+    width: 104%;
+    border: 1px solid gainsboro;
+    position: absolute;
+    margin-left: -9.5%;
+    padding: 0;
+}
+    
+    /*Circular Svg*/
+    
+#svg circle {
+  stroke-dashoffset: 50;
+  transition: stroke-dashoffset 1s linear;
+  stroke: #666;
+  stroke-width: 1em;
+}
+#svg #bar {
+  stroke: #FF9F1E;
+  
+}
+#cont {
+  display: block;
+  height: 80px;
+  width: 80px;
+  margin: 2em auto;
+  box-shadow: 0 0 1em black;
+  border-radius: 100%;
+  position: relative;
+  
+}
+#cont:after {
+  position: absolute;
+  display: block;
+  height: 160px;
+  width: 160px;
+  left: 50%;
+  top: 50%;
+  box-shadow: inset 0 0 1em black;
+  content: attr(data-pct)"%";
+  margin-top: -80px;
+  margin-left: -80px;
+  border-radius: 100%;
+  line-height: 160px;
+  font-size: 2em;
+  text-shadow: 0 0 0.5em black;
+}
+
+input {
+  color: #000;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+    margin-top: -15%;
+    position: absolute;
+    left: -60px;
+    top: -48px;
+}
+
+
+
+
+.svgtext { font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;  background-color: #0d0d0d; color: #fff; height: 100%; padding-top: 2em; text-align: center;}
+
+.fiximg {
+    margin-left: 36% !important;
+    margin-bottom: 4px;
+}
+
+.text-success{
+    padding-left: 57px !important;
+}
+
+body{
+    font-family: 'Istok Web', sans-serif;
+}
+
+.studtestim{
+        margin-top: 161%;
+        margin-bottom:-10px;
+}
+
+
+  </style>
+  <script>
+      $("#percent").on("change", function() {
+  var val = parseInt($(this).val());
+  var $circle = $("#svg #bar");
+
+  if (isNaN(val)) {
+    val = 100;
+  } else {
+    var r = $circle.attr("r");
+    var c = Math.PI * (r * 2);
+
+    if (val < 0) {
+      val = 0;
+    }
+    if (val > 100) {
+      val = 100;
+    }
+
+    var pct = ((100 - val) / 100) * c;
+
+    $circle.css({ strokeDashoffset: pct });
+
+    $("#cont").attr("data-pct", val);
+  }
+});
+
+  </script>
+  </head>
+
+  <body>
+    <div>
+      <img class="img-responsive" style="margin:0px;min-width:100%;" height="60px" src="https://yt3.ggpht.com/MVb4FIpLMFN3HJ7RpIzIZK3IN9wLPjdZDYc8f-Q1smrBxFHKZAvSUTXA28aT5Palwslgkc9bzA=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj">
+    </div>
+    <span class="container">
+      <span class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="background-color: ;">
+                  <div style="" class="studtestim">
+                      <br><br><br><br>
+                    <!--Testimonials start-->
+                    <div class="container text-center text-justify" style="">
+                      <h3 class="text-success"><span style="font-weight:bolder; padding-left:40px;margin-bottom:-20px;">Testimonials</span><br><span style="font-weight:bolder;"></span></h3><br>
+                      <div class="">
+                        <div class="row">
+                          <div class="row" style="padding-left:4%;margin-top:-10px;">
+                            <div class="row">
+                              <span class="col-md-3" style="">
+                                <img src="assets/imgm/testimonials/samiksha.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                              </span><br><br><br><br>
+                              <div class="row">
+                                <span class="text-center text-primary col-lg-3 colmd-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-1%;margin-left:1.1%;">
+                                  <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Pratiksha Patil</b></p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;">Rocky Sir, and his team helped me in understanding all core ML concepts.</p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">BTech(CS) | Jr. Data Analyst</p><br>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-left:4%;">
+                            <div class="row">
+                              <span class="col-md-3" style="">
+                                <img src="assets/imgm/testimonials/nidhi.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                              </span><br><br><br><br>
+                              <div class="row">
+                                <span class="text-center text-primary col-lg-3 col-md-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-1%;margin-left:1.1%;">
+                                  <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Nidhi Shah</b></p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;">The Jupyter Notebooks made by SuvenML team is awesome. I enjoyed learning at SuvenML.</p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">BSci(CS) | Jr. Data Scientist </p><br>
+                                </span></div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-left:4%;">
+                            <div class="row">
+                              <span class="col-md-3" style="">
+                                <img src="assets/imgm/testimonials/shrivats.jpg" class="img-circle fiximg" alt="" width=80 height=80 style="margin-rignt:-5px;">
+                              </span><br><br><br><br>
+                              <div class="row">
+                                <span class="text-center text-primary col-lg-3 colmd-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-1%;margin-left:1.1%;">
+                                  <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Sameeksha Shrivastava</b></p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;">Each course at Suven is awesome. I have done almost all.</p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">System Engineer | 5+ Years Work Exp.</p><br>
+                                </span></div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-left:4%;">
+                            <div class="row">
+                              <span class="col-md-3" style="">
+                                <img src="assets/imgm/testimonials/akash.jpg" class="img-circle fiximg" alt="" width=80 height=80 style="margin-rignt:-5px;">
+                              </span><br><br><br><br>
+                              <div class="row">
+                                <span class="text-center text-primary col-lg-3 colmd-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-1%;margin-left:1.1%;">
+                                  <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Aahan Gupta</b></p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;">Learning from their courses enabled me fully to take part and excel in kaggle competitions. Great content , great teaching.</p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">BE(CS) | Data Scientist</p><br>
+                                </span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      </span>
+      <span class="col-lg-9 col-md-9" style="background-color: ;padding-right:0%;margin-right:-10%;">
+          <br>
+        <span style="display:inline;">
+            <span style="float:left;position: ;color:gray; margin-left: -30px;margin-right: -19px;margin-bottom: -19px;">
+            <img src="https://datascience.suvenconsultants.com/elearning/images/machinelearn.png" width="135" height="130" class="rounded img-fluid float-left" alt="...">
+        </span>
+        <h1 class="text-left" style="margin-left:-28px;margin-top:42px; font-weight:bolder;font-size: 46px;">Machine Learning <span style="color:#3c763d">Beginner</span></h1>
+        <div class="indie" style="font-size: 18px;margin-top: -1px;margin-right: 350px;color:#3c763d;display: block;position: absolute;left: 103px;">Supervised &amp;
+          Unsupervised ML, ML
+          pipeline, Basic Data Exploration, Train-Test-Split, Encoding Categorical data, Feature Scaling, Decision (CART) Trees, Random Forest, Naive Bayes
+          Classification, Principal Component Analysis, k-Means
+          Clustering and deploying ML models on FLASK.<br><br>
+          <span style="font-size:16px"><b>Pre-requisite for this course :</b> You should know <b>Python</b> for <b>Data Science</b>. </span>
+        </div>
+        </span>
+        
+    
+        
+        
+        <hr style="min-width:100%;margin-top:21%;border:solid 0.5px silver;margin-left:-30px;">
+        <div class="col-lg-12 col-md-12">
+          <span class="col-lg-9 col-md-9" style="">
+            <div class="container-fluid" style="width: 105%;margin-left:-10%;">
+              <span style="width:100%;margin-left:-15px;">
+                <span style="font-family: zeitung, sans-serif;font-size: 20px;font-weight: 600;margin-bottom: 15px;-webkit-box-flex: 1;flex-grow: 1;padding-left: 28px;"><b>Lesson</b></span>
+                <span style="float: right;margin-right: 4px;font-size: 20px;font-weight: 600;"><b>Notebook</b>&nbsp;&nbsp;&nbsp;<span style="float:right;font-size: 20px;font-weight: 600;"><b>Quiz</b></span></span>
+              </span>
+              <ol type="" class="selen">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span style="font-size:18px;"><b>Supervised & Unsupervised ML</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">You would perfectly understand the applications of Machine learning. Be able to distinguish between Supervised and Unsupervised Machine learning algorithms.</span>
+                    </span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>ML Pipeline</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">Any Machine Learning problem has to solved through a series of steps from "data cleaning" to "making the ML model". You would learn these steps through solving a simple Case Study completely.
+
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>Basic Data Exploration</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">You would be able perform basic "Data Exploration" thereby gaining statistics information of the data. This helps in deciding what type of ML Algo should we apply to our data.
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>Train Test Split</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">In Machine Learning if we use the entire data for training, then how should we test our own Model ? You would understand Why and How to Split the data. Usually its 80% for Training and 20% for Testing the Model. You would learn this through solving a Linear Regression problem completely.
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>Encoding Categorical data</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">All Machine Learning algorithms can only understand numeric data. You would learn different types of categorical data and ways to convert them into numeric values.
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>Feature Scaling</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">At times numeric features are very wide spread something like youtube_Video_views. You would learn 3 different ways on scaling or normalizing them.  
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>Decision (CART) Trees</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">You would learn how to apply and solve problems by using Decision Trees for Regression & Classification both.
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>Random Forest</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">A single decision tree can do a fine job but we can improve its performance by using many Decision trees. This method of using many ML algorithms is called ensemble method. You would learn Random Forest ensemble method and solve some problems.
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>Naive Bayes Classification</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">You would learn in simplest possible ways about "Bayes" theorem and apply the Naive Bayes theorem to solve a Machine learning problem.
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>Principal Component Analysis</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">You would learn about dimensionality reduction, i.e how to shortlist most important features which influence the target variable. Most of the times very few features actually influence the target variable.
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>k-Means Clustering</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">Clustering is an Unsupervised Machine Learning Algorithm. You would learn how to select important features and divide the data set into clusters. Post Clustering we can label the data and possibly use it to apply some Supervised ML model.
+                    </span></span></div>
+                </li><hr class="subhr">
+                <li class="lessons">
+                  <div style="width:100%;margin-top:-10px;">
+                    <span><b>Deploying ML models on FLASK</b></span>
+                    <span style="float: right;"><img width=50 height=50 src="images/icons/doc.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="float:right;"><img width=48 height=48 src="images/icons/quiz.png"></span></span>
+                  </div>
+                  
+                  <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie" style="font-size:17px;">You would learn how to put your ML model to good use. You would host your pickle file (i.e the ML model) over FLASK (web application framework). In this way your friends , teachers and your Boss (at work) would be able to use your ML model for predicting, classifying or recommending. 
+                    </span></span></div>
+                </li>
+              </ol>
+            </div>
+          </span>
+          <span class="col-lg-3 col-md-3" style="">
+            <div class="container-fluid"><br><br>
+              <span style="width:100%;" class="text-center">
+                <span><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Progress</b></span><br><br>
+              </span>
+              <!--Progress Bar Starts Here-->
+              <div class="svgresized" style="margin-left:-5px;margin-left:-10px;">
+                <div id="cont" data-pct="50" class="svgtext">
+                <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                  <circle r="50" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+                  <circle id="bar" r="60" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+                </svg>
+                </div>
+                </div>
+              
+                <!--<label for="percent">Type a percent!</label>-->
+                <!--<input id="percent" name="percent">-->
+              <!--Progress Structure ends-->
+              <div><br><br>
+                  
+                  
+        <!-- Begin Fixed RIght Share -->
+        <div class="col-md-3 col-xs-12 meright" style="float:right;position:absolute;">
+
+          <h3 class="text-success text-center shiftme"><span style="font-weight:bolder; font-size:25px;margin-left:-47px;">Instructors</span></h3>
+          <div class="">
+            <div class="row">
+
+              <div class="">
+                <div class="row" style="margin-right: -85px;margin-left: -27px;margin-top:10px;">
+                  <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 22%;">
+                    <img src="https://datascience.suvenconsultants.com/images/testimonials/1per.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                  </span>
+                  <div class="row">
+                    <span class="text-justify text-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size: 13px; margin-left:24px;">
+
+                      <b class="text-info applypads" style="font-weight: bolder;font-size:1.2rem;">Rocky Jagtiani</b> Technology trainer to companies like Accenture , Morgan Stanley, EY. Have trained more than 18000 candidates in 0-3 years work-ex category.<br><br><br><br>
+
+                    </span></div>
+                </div>
+              </div>
+
+              <div class="">
+                <div class="row"  style="margin-right: -85px;margin-left: -27px;">
+                  <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 22%;">
+                    <img src="https://datascience.suvenconsultants.com/images/testimonials/2per.jpg" class="img-circle fiximg" alt="" width=80 height=80 style="">
+                  </span>
+                  <div class="row">
+                    <span class="text-justify text-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:13px; margin-left:24px;">
+
+                      <b class="text-info applypads" style="font-weight: bolder;font-size:1.2rem;">Niraj Sharma</b> Presently Data Analyst at NeoSoft (CMM level 5). An expert in R programming. An active contributor at Kaggle Data Analytics using R competitions.<br><br><br><br>
+
+                    </span></div>
+                </div>
+              </div><br>
+                
+            </div>
+          </div>
+        </div>
+        <!-- End Fixed Right Share -->
+
+
+
+              </div>
+            </div>
+          </span>
+        </div>
+      </span>
+      <!--<span class="col-lg-2 col-md-2" style="background-color: ;">B-->
+      <!--</span>-->
+    </span>
+  </body>
+</html>
