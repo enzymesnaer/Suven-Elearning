@@ -1,1495 +1,1304 @@
-<?php 
-session_start();
-?>
+<?php include 'header.php';?>
+<?php require 'dbconnect.php';?>
+
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Data Science | Machine Learning | Python | Data Analytics | R | Suven Consultants</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" type="text/css" href="dist/fullpage.css" /> -->
-    <meta property="og:image" itemprop="image" content="https://suvenconsultants.com/datascience/elearning/mymeta.jpg">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" type="text/css" href="dist/fullpage.css" /> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/internship.css">
-    <link rel="stylesheet" href="../css/font-awesome.css">
-    <link rel="stylesheet" href="../css/trainers.css">
-    <link rel="stylesheet" href="../css/timeline.css">
-
-   
-    <!-- Modernizr -->
-    <script src="../js/main.js"></script>
-    <script>
-      $(window).on("load", function() {
-        if ($.cookie('subscribe') == null) {
-          setTimeout(function() {
-            $('#subscribeModal').modal('show');
-          }, 2000);
-        }
-      });
-</script>
-<script type="text/javascript">
-      
-        
-      $(document).on('click', '#subscribeme', function(){
-      var formdata = $("#subscribeForm").serialize();
-      console.log(formdata);
-      var subdata_e = document.getElementById("subscribe_email").value;
-      var subdata_n = document.getElementById("subscribe_name").value;
-      var subdata_c = document.getElementById("subscribe_contact").value;
-      // console.log(subdata_e);
-      // console.log(subdata_n);
-      // console.log(subdata_c);
-      if((subdata_e == "" ||  subdata_e == null) && (subdata_c == "" ||  subdata_c == null) && (subdata_n == "" || subdata_n == null)){
-        alert("Please enter all details");
-      }else{
-        $('#subscribeModal').modal('hide');
-        $.ajax({
-          url:'subscribeus.php',
-          method:'POST',
-          data: formdata,
-          success:function(response){
-            $("#displayinModal").html(response);
-            $('#actionsModal').modal('show');
-          }
-        });
-      }
-      
-    });
-
-    </script>
-
-    
-    
-    <script type="text/javascript">
-      document.addEventListener('contextmenu', event => event.preventDefault());
-
-    </script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap core CSS -->
+    <link href="./assets/cssm/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="./assets/cssm/mediumish.css" rel="stylesheet">
     <style>
-      html,
-      body {
-        max-width: 100%;
-        overflow-x: hidden;
-      }
-
-      .pseudo-ul li::before {
-        content: "✓";
-        font-weight: 2000;
-      }
-
-      .social-links a.twitter {
-        background: url(../social-icons/twitter-gray.png);
-      }
-
-      .social-links a.flickr {
-        background: url(../social-icons/flickr-gray.png);
-      }
-
-      .social-links a.vimeo {
-        background: url(../social-icons/vimeo-gray.png);
-      }
-
-      .social-links a.linkedin {
-        background: url(../social-icons/linkedin-gray.png);
-      }
-
-      .social-links a.facebook {
-        background: url(../social-icons/facebook-gray.png);
-      }
-
-      .social-links a.paypal {
-        background: url(../social-icons/paypal-gray.png);
-      }
-
-      .social-links a.email {
-        background: url(../social-icons/email-gray.png);
-      }
-
-      .social-links a.yahoo {
-        background: url(../social-icons/yahoo-gray.png);
-      }
-
-      .social-links a.github {
-        background: url(../social-icons/github-gray.png);
-      }
-
-      .social-links a.googleplus {
-        background: url(../social-icons/googleplus-gray.png);
-      }
-
-      .social-links a.apple {
-        background: url(../social-icons/apple-gray.png);
-      }
-
-      .social-links a.myspace {
-        background: url(../social-icons/myspace-gray.png);
-      }
-
-      .social-links a.youtube {
-        background: url(../social-icons/youtube-gray.png);
-      }
-
-      .social-links a.skype {
-        background: url(../social-icons/skype-gray.png);
-      }
-
-      .social-links a.tumblr {
-        background: url(../social-icons/tumblr-gray.png);
-      }
-
-      .social-links a.google {
-        background: url(../social-icons/google-gray.png);
-      }
-
-
-      .social-links a.twitter:hover {
-        background: url(../social-icons/twitter.png);
-      }
-
-      .social-links a.flickr:hover {
-        background: url(../social-icons/flickr.png);
-      }
-
-      .social-links a.vimeo:hover {
-        background: url(../social-icons/vimeo.png);
-      }
-
-      .social-links a.linkedin:hover {
-        background: url(../social-icons/linkedin.png);
-      }
-
-      .social-links a.facebook:hover {
-        background: url(../social-icons/facebook.png);
-      }
-
-      .social-links a.paypal:hover {
-        background: url(../social-icons/paypal.png);
-      }
-
-      .social-links a.email:hover {
-        background: url(../social-icons/email.png);
-      }
-
-      .social-links a.yahoo:hover {
-        background: url(../social-icons/yahoo.png);
-      }
-
-      .social-links a.github:hover {
-        background: url(../social-icons/github.png);
-      }
-
-      .social-links a.googleplus:hover {
-        background: url(../social-icons/googleplus.png);
-      }
-
-      .social-links a.apple:hover {
-        background: url(../social-icons/apple.png);
-      }
-
-      .social-links a.youtube:hover {
-        background: url(../social-icons/youtube.png);
-      }
-
-      .social-links a.skype:hover {
-        background: url(../social-icons/skype.png);
-      }
-
-      .social-links a.tumblr:hover {
-        background: url(../social-icons/tumblr.png);
-      }
-
-      .social-links a.aim:hover {
-        background: url(../social-icons/aim.png);
-      }
-
-      .social-links a.google:hover {
-        background: url(../social-icons/google.png);
-      }
-
-      #footer a {
-        color: white;
-        text-decoration: none;
-      }
-
-      .one a {
-        margin-right: 30px;
-        margin-bottom: 20px;
-      }
-
-      .two a {
-        margin-right: 15px;
-        margin-bottom: 20px;
-      }
-
-      /*For the footer of all page*/
-
-      /**/
-
-      .training {
-        background-color: #fff;
-        border: 1px solid silver;
-        box-shadow: 0px 0px 10px silver;
+      .share {
+        text-align: center;
+        margin-top: 10px !important;
+        margin-left: 40px;
+        border: none;
+        width: 200px;
         border-radius: 10px;
-        padding-top: 5px;
-        padding-left: 5px;
-        padding-right: 5px;
-        padding-bottom: -5px;
-        position: fixed;
-        bottom: 50px;
-        right: 10px;
-        z-index: 999;
-        line-height: 10px;
       }
-
-      .syllabus {
-        padding: 100px;
-      }
-
-      .freshers {
-        background-color: #fff;
-        border: 1px solid silver;
-        box-shadow: 0px 0px 10px silver;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-right: 5px;
-        padding-bottom: -10px;
-        position: fixed;
-        bottom: 50px;
-        left: 0px;
-        z-index: 999;
-        line-height: 10px;
-      }
-
-
-      /* xs < 768 */
-      @media screen and (max-width: 767px) {
-        .training {
-          font-size: 10px;
-          line-height: 1px;
-          bottom: 90px;
-        }
-
-        .freshers {
-          font-size: 10px;
-          line-height: 10px;
-          bottom: 30px;
-          padding-top: 5px;
-          padding-left: 5px;
-          padding-right: 5px;
-          padding-bottom: -10px;
-        }
-      }
-
-      /* sm */
-      @media screen and (min-width: 768px) {
-        .training {
-          font-size: 12px;
-        }
-
-        .freshers {
-          font-size: 10px;
-          line-height: 10px;
-          bottom: 30px;
-          padding-top: 5px;
-          padding-left: 5px;
-          padding-right: 5px;
-          padding-bottom: -10px;
-        }
-      }
-
-      /* md */
-      @media screen and (min-width: 992px) {
-        .training {
-          font-size: 14px;
-          line-height: 10px;
-        }
-
-        .freshers {
-          font-size: 14px;
-          line-height: 20px;
-          bottom: 40px;
-          padding-top: 10px;
-          padding-left: 10px;
-          padding-right: 5px;
-          padding-bottom: -10px;
-        }
-      }
-
-      /* lg */
-      @media screen and (min-width: 1200px) {
-        .training {
-          font-size: 14px;
-          line-height: 10px;
-        }
-
-        .freshers {
-          font-size: 14px;
-          line-height: 20px;
-          bottom: 40px;
-          padding-top: 10px;
-          padding-left: 10px;
-          padding-right: 5px;
-          padding-bottom: -10px;
-        }
-      }
-
-      .codeint {
-        font-size: 11px;
-        background-color: #fff;
-        border: 1px solid silver;
-
-
-        box-shadow: 0px 0px 10px silver;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-right: 5px;
-
-
-        padding-bottom: 5px;
-        position: fixed;
-        bottom: 130px;
-        left: 0px;
-        z-index:
-
-          999;
-        line-height: 10px;
-      }
-
-      .navbar-default {
-        background-image: -webkit-linear-gradient(top, #34495e 0, #34495e 100%);
-        background-image: -o-linear-gradient(top, #34495e 0, #34495e 100%);
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#34495e), to(#34495e));
-        background-image: linear-gradient(to bottom, #34495e 0, #34495e 100%);
-        background-repeat: repeat-x;
-        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-        border-radius: 0px;
-        -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 5px rgba(0, 0, 0, .075);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 5px rgba(0, 0, 0, .075);
-      }
-
-      .navbar-default {
-        background-color: #f8f8f8;
-        border-color: #e7e7e7;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      *:before,
-      *:after {
-        box-sizing: border-box;
-      }
-
-      .bg-border-radius {
-        : -48%;
-        overflow: hidden;
-        border-radius: 0px 180px 180px 0px;
-        background-color: #0080C1;
-      }
-
-      q {
-        quotes: "“""”""‘""’";
-      }
-
-      q:before {
-        content: open-quote;
-      }
-
-      q:after {
-        content: close-quote;
-      }
-
-      .btn-default {
-        margin: 3px;
-        padding: 20px;
+      
+      .share2 {
         text-align: center;
-        text-transform: uppercase;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;
-        /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-        box-shadow: 0 0 20px #eee;
+        margin-top: 10px !important;
+        margin-left: 40px;
+        border: none;
+        width: 200px;
         border-radius: 10px;
-        left: 250px;
       }
 
-      .syllabus {
-        margin-top: -80px;
+      .list-group-item:last-child {
+        padding: 0 !important;
+        border: 0px solid gainsboro !important;
       }
 
-      .container {
-        margin: 0;
-        padding: 0;
-      }
-
-      /* Demo Stuff End -> */
-
-      /* <- Magic Stuff Start */
-
-      .btn-default:hover {
-        background-position: right center;
-        /* change the direction of the change here */
-      }
-
-      .btn-1 {
-        background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%);
-      }
-
-      .card-box {
-        /* min-height: 0; */
-        position: relative;
-        padding: 10px;
-        margin-bottom: 20px;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        position: relative;
-        cursor: pointer;
-        text-align: center;
-        margin-top: -48px;
-      }
-
-      .card-box:hover {
-        background: linear-gradient(to right, #1fa2ff17 0%, #12d8fa2b 51%, #1fa2ff36 100%);
-      }
-
-      .card-box:after {
-        display: block;
-        content: '';
-        width: 100%;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-      }
-
-      .card-title h2 {
-        margin: 0;
-        padding-top: 5%;
-        color: #2196F3;
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-size: 24px;
-        line-height: 1;
-        margin-bottom: 15px;
-      }
-
-      .card-title p {
-        margin: 0;
-        margin-bottom: 10px;
-        font-size: 16px;
-      }
-
-      .card-link a {
-        text-decoration: none;
-        font-family: 'Oswald', sans-serif;
-        color: #FF5722;
-        font-size: 15px;
-      }
-
-      .bg-border-radius {
-        overflow: hidden;
-        border-radius: 0px 100px 100px 0px;
-        background-color: #0080C1;
-      }
-
-      @media only screen and (max-width: 600px) {
-        .bg-border-radius {
-          width: 95%;
-        }
-      }
-
-      .strikethrough-diagonal {
-        position: relative;
-        color: red;
-        font-weight: 500;
-      }
-
-      .strikethrough-diagonal:before {
-        position: absolute;
-        content: '';
-        left: 0;
-        top: 45%;
-        right: 0;
-        border-top: 1px solid;
-        border-color: inherit;
-        -webkit-transform: skewY(-10deg);
-        -moz-transform: skewY(-10deg);
-        transform: skewY(-10deg);
-      }
-
-      .well {
-        background: #228B22;
-        color: #fff;
-      }
-
-
-
-      .checkmark {
-        display: inline-block;
-        position: relative;
-        opacity: 0;
-      }
-
-      .checkmark:after {
-        content: '';
-        display: block;
-        width: 7px;
-        height: 12px;
-        border: solid #fcba03;
-        border-width: 0 2.5px 2.5px 0;
-        border-color: #fcba03;
-        transform: rotate(45deg);
-      }
-
-      .checkmark-animation {
-        animation: pop-up .5s ease .5s;
-        animation-fill-mode: forwards;
-      }
-
-      .invalid {
-        opacity: 0;
-        position: relative;
-        text-align: center;
-        font-family: monospace;
-        color: #ED574A;
-        animation: pop-up .7s ease .4s;
-        animation-fill-mode: forwards;
-      }
-
-      @keyframes pop-up {
-        from {
-          top: 10px;
-          opacity: 0;
-        }
-
-        to {
-          top: 0px;
-          opacity: 1;
-        }
-      }
-
-      .subjects1 .label,
-      .label-primary {
-        background: #55aef7 !important;
-        color: white;
-        border-radius: 0.25em;
-        margin-left: 6px;
-        padding: 5px 15px 5px 15px !important;
-        color: white;
-        border-radius: 0.25em;
+      .float {
+        position: fixed;
+        width: 40px;
         height: 40px;
-        font-size: 13px;
+        bottom: 111px !important;
+        left: 17px;
+        background-color: #25d366;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 100;
       }
 
-
-      #authenticationModal .modal-header li a {
-        background-color: #2ecc71;
-        border-radius: 0px;
-        color: #fff;
+      .style_prevu_kit {
+        display: inline-block;
+        /*border:0;*/
+        /*width:196px;*/
+        /*height:210px;*/
+        position: relative;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);
       }
 
-
-      #authenticationModal .modal-header li a:hover {
-        background-color: #2ecc71;
-        border-radius: 0px;
-        color: #fff;
+      .style_prevu_kit:hover {
+        box-shadow: 0px 0px 10px #000000;
+        z-index: 500;
+        -webkit-transition: all 50ms ease-in;
+        -webkit-transform: scale(0.1);
+        -ms-transition: all 50ms ease-in;
+        -ms-transform: scale(0.1);
+        -moz-transition: all 50ms ease-in;
+        -moz-transform: scale(0.1);
+        transition: all 50ms ease-in;
+        transform: scale(1.0009);
       }
 
-      #authenticationModal .modal-header .active a {
+      .style_prevu_kit2 {
+        display: inline-block;
+        border: 0;
+        width: 255px;
+        height: 300px;
+        margin: 6px;
+        position: relative;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);
+      }
+
+      .style_prevu_kit2:hover {
+        box-shadow: 0px 0px 10px #000000;
+        z-index: 500;
+        -webkit-transition: all 50ms ease-in;
+        -webkit-transform: scale(0.1);
+        -ms-transition: all 50ms ease-in;
+        -ms-transform: scale(0.1);
+        -moz-transition: all 50ms ease-in;
+        -moz-transform: scale(0.1);
+        transition: all 50ms ease-in;
+        transform: scale(1.0009);
+      }
+
+      .enrollbtn {
+        position: relative !important;
         background-color: #34495e !important;
-        border-radius: 0px;
-        color: #fff;
-        font-weight: bold;
+        color: #ffbb00 !important;
       }
 
-      #authenticationModal .modal-content {
-        border-radius: 0px !important;
-      }
-
-
-      #registration {
-        margin-top: -1%;
+      .enrollbtn:hover {
+        background-color: #337ab7 !important;
+        color: #ffbb00;
+        border-radius: 0.25em;
+        color: #ffbb00;
+        border-radius: 0.25em;
       }
 
     </style>
-  </head>
-
-  <body style="">
-
-    <!-- nav bar -->
-
-
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="https://suvenconsultants.com/" style=""><img src="https://suvenconsultants.com/mainpagefiles/images/sctpl_logo.png" style="display:inline; margin-left:30px;">
-            <span>Suven Consultants & Technology Pvt. Ltd.</span></a>
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
-            <li style="margin-left:-10px;padding-left:3px;margin-right: 20px;"><?php
-                    if(isset($_SESSION['uid'])){
-                    
-                    
-                    echo '<li><button class="btn btn-danger" style="margin-left:13px;margin-top:15px;"><a href="logout.php" class="btn btn-danger btn-sm center-block">Logout</a></button></li>'; 
-                       
-                    }else{
-                        
-                        echo '<li><button class="btn btn-success" data-toggle="modal" data-target="#authenticationModal" style="margin-left:13px;margin-top:15px;"><b>Log In</b></button></li>'; 
-                        
-                    }
-                ?></li>
-            <li style="margin-left:-10px;padding-left:3px;color:#fcba03;margin-right: 20px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" class="head_panel" style="font-size:14px; color:#fcba03 !important;">
-                <div class="checkmark checkmark-animation"></div>&nbsp;&nbsp;Join Wait List
-              </a></li>
-
-            // <?php
-        // 		if(isset($_SESSION['uid'])){
-                              
-        //                 echo '<li>
-        //                     <ul class="dropdown-menu hidden-sm hidden-xs" style="padding:5px;">
-        //                         <li class="text-center"><p><b>'.$_SESSION['name'].'</b></p>
-        //                         <p>'.$_SESSION['email'].'</p></li>
-        //                         <li class="divider"></li>
-        //                         <a href="logout.php" class="btn btn-danger btn-sm center-block">Logout</a>
-        //                     </ul>
-                            
-        //                     <ul class="dropdown-menu hidden-lg hidden-md" style="padding:5px;">
-        //                         &nbsp;&nbsp;<a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
-        //                     </ul></li>';    
-        // 		}    
-        //         ?>
-            <li style="margin-left:-10px;padding-left:3px;"><a href="https://datascience.suvenconsultants.com" class="head_panel" style="font-size:14px">Classroom Training</a></li>
-
-          </ul>
-          <ul class="nav navbar-nav navbar-right hidden-lg hidden-md">
-            <li style="margin-top:-2px;"><?php
-                    // if(isset($_SESSION['uid'])){
-                    // echo '';
-                    // }else{
-                    //   echo '<li><button class="btn btn-success" data-toggle="modal" data-target="#authenticationModal" style="margin-left:13px;margin-top:15px;"><b>Log In</b></button></li>'; 
-                    // }
-                ?></li>
-            <?php
-        // 		if(isset($_SESSION['uid'])){
-        // 		    echo '<li class="dropdowns">
-        //                     <div class="inset" class="dropdown-toggle" data-toggle="dropdown">';
-                              
-        //                 echo '</div>
-        //                     <ul class="dropdown-menu hidden-sm hidden-xs" style="padding:5px;">
-        //                         <li class="text-center"><p><b>'.$_SESSION['name'].'</b></p>
-        //                         <p>'.$_SESSION['email'].'</p></li>
-        //                         <li class="divider"></li>
-        //                         <a href="logout.php" class="btn btn-danger btn-sm center-block">Logout</a>
-        //                     </ul>
-                            
-        //                     <ul class="dropdown-menu hidden-lg hidden-md" style="padding:5px;">
-        //                         &nbsp;&nbsp;<a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
-        //                     </ul></li>';    
-        // 		}    
-                ?>
-
-            <li style="margin-top:-5px; color:#fcba03;"><a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" class="head_panel" style="font-size:14px; color:#fcba03; !important">
-                <div class="checkmark checkmark-animation"></div>&nbsp;&nbsp;Join Wait List
-              </a></li>
-            <li style="margin-top:-5px;"><a href="https://datascience.suvenconsultants.com" class="head_panel" style="font-size:14px">Classroom Training</a></li>
-          </ul>
-
-          <!---->
-
-
-
-
-          <!---->
-        </div>
-      </div>
-    </nav>
-    <br><br>
-
-
-    <?php include("postnew.php");?>
-    <!-- Login & Registration Modal -->
-    <div class="modal" id="authenticationModal">
-      <div class="modal-dialog modal-md">
-        <div class="modal-content">
-          <div class="modal-header" style="padding: 0px;">
-            <ul class="nav nav-pills nav-justified">
-              <li class="active"><a href="#login" data-toggle="pill">Login</a></li>
-              <li><a href="#registration" data-toggle="pill">Register</a></li>
-            </ul>
-          </div>
-          <div class="modal-body">
-
-            <!--<h3 class="text-center"><img src="images/sctpl_logo.png" height="32px" width="32px" /> Suven Consultants & Technology Pvt. Ltd.</h3><br>-->
-            <div class="tab-content" style="border:none;">
-              <div id="login" class="tab-pane fade in active">
-                <!--<form name="loginForm" action="authentication.php" method="post" onsubmit="">-->
-                <form name="loginForm" action="authentication.php" method="post" onsubmit="return validateLogin()">
-                  <input type="hidden" name="action" value="login" />
-                  <div class="form-group">
-                    <label>Email ID:</label>
-                    <input type="email" class="form-control" name="email" placeholder="Email ID" required="required">
-                  </div>
-                  <div class="form-group">
-                    <label>Password:</label>
-                    <input type="password" class="form-control" name="password" placeholder="Password" required="required" minlength="6">
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-success center-block">Login <span class="glyphicon glyphicon-log-in"></span></button>
-                  </div>
-                  <p class="text-center">
-                    <a href="#registration" data-toggle="pill">New to our online courses? Register </a>
-                  </p>
-                </form>
-              </div>
-              <div id="registration" class="tab-pane fade">
-                <!--<form name="registerForm" action="authentication.php" method="post" onsubmit="">-->
-                <form name="registerForm" action="authentication.php" method="post" onsubmit="return validateRegister()">
-                  <input type="hidden" name="action" value="register" />
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                      <label>Full Name:</label>
-                      <input type="text" class="form-control" name="name" placeholder="Enter your full name" required="required">
-                      <p>This name would be used for certification purpose.</p>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                      <label>Email ID:</label>
-                      <input type="email" class="form-control" name="emailid" placeholder="Enter your Email ID" required="required">
-                      <p>This would be your default login username</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                      <label>Password:</label>
-                      <input type="password" class="form-control" name="password" id="password" placeholder="Password (minimum 8 characters)" required="required" minlength="8">
-                      <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                      <label>Confirm Password:</label>
-                      <input type="password" class="form-control" name="confirm_password" placeholder="Confirm password" required="required">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                      <label>Contact No.:</label>
-                      <input type="tel" class="form-control" name="contact" placeholder="Enter your contact no." required="required">
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                      <p>Our team would connect with you to understand your study requirements very soon.</p>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-success center-block">Register <i class="fa fa-user-plus"></i></button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Login & Registration Modal -->
-
-    <!-- ///////////////// Start of Footer /////////////////////////// -->
-    <h3 class="text-center center-block">Companies where our students are working</h3>
-    <div class="row text-center center-block">
-
-      <div class="col-lg-2 col-md-2 text-center center-block"></div>
-      <div class="col-lg-8 col-md-8 text-center center-block">
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center>
-                <img src="assets/imgm/icons/compns/jpm.png" style="width:auto; height:80px;" class="img-responsive">
-              </center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="assets/imgm/icons/compns/acc.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center> <img src="assets/imgm/icons/compns/quant.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="assets/imgm/icons/compns/mstan.jpg" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="assets/imgm/icons/compns/tcs.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="assets/imgm/icons/compns/mphasis.jpg" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="assets/imgm/icons/compns/ey.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="assets/imgm/icons/compns/here.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-2"></div>
-    </div>
-
-    <section id="bottom" class="navclass">
-      <div class="container-fluid hidden-xs hidden-sm" id="footer">
-        <br><br><br>
-        <div class="row">
-          <div class="col-lg-12 col-md-12 text-center center-block">
-
-            <div class="col-lg-2 col-md-2 text-left"></div>
-
-            <div class="col-lg-8 col-md-8 text-left">
-              <div class="col-md-4 text-left">
-
-                <p><a style="margin-left: 60%; font-size:13px;" href="https://datascience.suvenconsultants.com/elearning/aboutus.php" target="_blank">About Us</a></p>
-                <p><a style="margin-left: 60%; font-size:13px;" class="" href="https://www.youtube.com/user/rockyjagtiani" target="_blank">YouTube</a></p>
-                <p><a style="margin-left: 60%; font-size:13px;" class="" href="https://www.linkedin.com/in/rocky-jagtiani-3b390649/" target="_blank">LinkedIn</a></p>
-                <br><br><br><br>
-              </div>
-              <div class="col-md-4 text-left">
-
-                <p><a class="" style="margin-left: 10%;font-size:13px;" href="https://datascience.suvenconsultants.com" target="_blank">Classroom training at Mumbai</a></p>
-                <p><a class="" style="margin-left: 10%;font-size:13px;" href="#onlinecourses">List of Online Courses</a></p>
-                <br><br><br><br>
-              </div>
-              <div class="col-md-4 text-left">
-
-                <p><a class="" style="font-size:13px;" href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank"><b style="color:#fcba03;">Join our Wait List</b></a></p>
-                <p><a class="" style="font-size:13px;" href="https://datascience.suvenconsultants.com/elearning/refundpolicy.php" target="_blank">Refund Policy</a></p>
-                <p><a class="" style="font-size:13px;" href="https://mail.google.com/mail/?view=cm&fs=1&to=rocky@suvenconsultants.com" target="_blank">Help & Support</a></p>
-                <br><br><br><br>
-
-              </div>
-              <center classs="text-center">
-                <footer style="font-size:13px;">&copy; 2020 Suven Consultants & Technology Pvt Ltd</footer>
-              </center>
-              <br><br><br>
-
-            </div>
-            <div class="col-lg-2 col-md-2 text-left"></div>
-          </div>
-
-        </div>
-
-
-        <!-- end of row -->
-      </div><!-- end of container-->
-
-
-      <div class="container-fluid hidden-lg hidden-md" id="footer">
-        <div class="row">
-          <div class="col-sm-12 col-xs-12 text-center center-block">
-            <!--<div class="col-sm-2 col-xs-2 text-left"></div>-->
-            <div class="col-sm-12 text-center">
-              <br>
-              <p><a style="font-size:13px;" href="https://datascience.suvenconsultants.com/elearning/aboutus.php" target="_blank">About Us</a></p>
-              <p><a style="font-size:13px;" class="" href="https://www.youtube.com/user/rockyjagtiani" target="_blank">YouTube</a></p>
-              <p><a style="font-size:13px;" class="" href="https://www.linkedin.com/in/rocky-jagtiani-3b390649/" target="_blank">LinkedIn</a></p>
-              <br>
-            </div>
-            <div class="col-sm-12 text-center">
-
-              <p><a class="" style="font-size:13px;" href="https://datascience.suvenconsultants.com" target="_blank">Classroom training at Mumbai</a></p>
-              <p><a class="" style="font-size:13px;" href="#onlinecourses">List of Online Courses</a></p>
-              <br>
-            </div>
-            <div class="col-sm-12 text-center">
-
-              <p><a class="" style="font-size:13px;" href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank"><b style="color:#fcba03;">Join our Wait List</b></a></p>
-              <p><a class="" style="font-size:13px;" href="https://datascience.suvenconsultants.com/elearning/refundpolicy.php" target="_blank">Refund Policy</a></p>
-              <p><a class="" style="font-size:13px;" href="https://mail.google.com/mail/?view=cm&fs=1&to=rocky@suvenconsultants.com" target="_blank">Help & Support</a></p>
-              <br><br>
-
-            </div>
-            <center classs="text-center">
-              <footer style="font-size:13px;">&copy; 2020 Suven Consultants & Technology Pvt Ltd</footer>
-            </center>
-            <br><br>
-          </div>
-        </div>
-        <!--<div class="row" style="margin-left: auto; margin-right: auto;">-->
-        <!--  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
-        <!--    <ul>-->
-        <!--      <h4><strong>Training Programs</strong></h4>-->
-        <!--      <li><a href="https://datascience.suvenconsultants.com" target="_blank">Masters in Data Science</a></li>-->
-        <!--      <li><a href="https://db.suvenconsultants.com" target="_blank">Database SQL+PL/SQL</a></li>-->
-        <!--      <li><a href="https://android.suvenconsultants.com" target="_blank">Mobile App Dev (Android + iOS)</a></li>-->
-        <!--      <li><a href="https://java.suvenconsultants.com" target="_blank">Java Certification</a></li>-->
-        <!--      <li><a href="https://monster.suvenconsultants.com" target="_blank">Web Technologies</a></li>-->
-        <!--      <li><a href="https://datascience.suvenconsultants.com/#dataanalytics" target="_blank">Data Analytics using R</a></li>-->
-        <!--      <li><a href="https://datascience.suvenconsultants.com/#python" target="_blank">Python (Core + Advanced)</a></li>-->
-        <!--      <li><a href="https://android.suvenconsultants.com/#section-angular" target="_blank">Angular - Firebase</a></li>-->
-        <!--      <li><a href="https://digitalmarketing.suvenconsultants.com/" target="_blank">Digital Marketing SEO+SEM</a></li>-->
-        <!--      <li><a href="https://hacking.suvenconsultants.com/" target="_blank">Ethical Hacking</a></li>-->
-        <!--      <li><a href="https://statistics.suvenconsultants.com/" target="_blank">Statistics + Excel & Tableau</a></li>-->
-        <!--      <li><a href="https://training.suvenconsultants.com/" target="_blank">List of all Training Programs</a></li>-->
-        <!--      <li><a href="https://internship.suvenconsultants.com/" target="_blank">Coding Internships</a></li>-->
-        <!--    </ul>-->
-        <!--  </div>-->
-        <!--  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
-        <!--    <ul>-->
-        <!--      <h4><strong>Recruitment Services</strong></h4>-->
-        <!--      <li><a href="https://freshers.suvenconsultants.com/" target="_blank">Fresher IT Jobs</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">IT Recruitment - Lateral</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Non-IT and Support for Lateral upto VP/GM etc.</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Employee Verification through Reference Checks</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Interview and Rejection handling services</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Salary Negotiations as per Industry norms</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Profile Mapping as per Industry norms</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Complete Hand-holding Support till Joining</a></li>-->
-        <!--    </ul>-->
-        <!--  </div>-->
-        <!--  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
-        <!--    <ul>-->
-        <!--      <h4><strong>Company</strong></h4>-->
-        <!--      <li><a href="https://suvenconsultants.com/recruitment.php" target="_blank">About us</a></li>-->
-        <!--      <li><a href="https://suvenconsultants.com/JobPosting.php" target="_blank">Current Job Openings</a></li>-->
-        <!--      <li><a href="https://suvenconsultants.com/feedback.php" target="_blank">Training Feedbacks</a></li>-->
-        <!--      <li><a href="https://mentor.suvenconsultants.com/" target="_blank">Our Mentors</a></li>-->
-        <!--      <li><a href="https://www.google.co.in/search?nfpr=1&q=suven+consultants&spell=1&sa=X&ved=0ahUKEwidoubh1dXdAhWFNY8KHfrxBZoQBQgpKAA&biw=1366&bih=657#lrd=0x3be7c8afbfffffff:0xcf0cd79d3c52220a,1,,," target="_blank">Google Reviews</a></li>-->
-        <!--      <li><a href="https://www.facebook.com/suvenconsultants/reviews/?ref=page_internal" target="_blank">Facebook Reviews</a></li>-->
-        <!--      <li><a href="https://suventechnology.blogspot.com" target="_blank">Technical Blog</a></li>-->
-        <!--    </ul>-->
-        <!--  </div>-->
-        <!--  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
-        <!--    <ul>-->
-        <!--      <h4><strong>Get In Touch</strong></h4>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#addressModal">SCTPL Branches</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#contactModal">Contact us</a><br>-->
-        <!--      <li><a href="https://www.facebook.com/suvenconsultants/" target="_blank">Facebook</a></li>-->
-        <!--      <li><a href="https://www.linkedin.com/in/rocky-jagtiani-3b390649/" target="_blank">LinkedIn For Training</a></li>-->
-        <!--      <li><a href="https://in.linkedin.com/in/simran-jagtiani-752b0347" target="_blank">LinkedIn For Recruitment</a></li>-->
-        <!--    </ul>-->
-        <!--  </div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--  <div class="social-links">-->
-        <!--    <h4>Connect with us</h4>-->
-        <!--    <a class="facebook" href="https://www.facebook.com/suvenconsultants/" target="_blank"></a>-->
-        <!--    <a class="linkedin" href="https://in.linkedin.com/in/simran-jagtiani-752b0347" target="_blank"></a>-->
-        <!--    <a class="youtube" href="https://www.youtube.com/user/rockyjagtiani" target="_blank"></a>-->
-        <!--  </div>-->
-        <!--</div> <!-- end of row -->-->
-      </div>
-    </section>
-
-
-    <!-- Popup Modal For Addresses -->
-    <div id="addressModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4><strong>SCTPL Training Room Addresses</strong></h4>
-            <h5 class="modal-title">Centralized Contact No.: <strong>+91 9870014450</strong></h5>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <address class="chembur_address">
-                </address>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <address class="borivali_address">
-                </address>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <address class="thanenew_address">
-                </address>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <address class="dadarnew_address">
-                </address>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="Subscribe us">
-      <div class="modal-dialog modal-smll" role="modal">
-          <div class="modal-content">
-            <div class="modal-content">
-              <div class="modal-header text-center">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span class="badge" style="background-color:#000">x</span>
-                </button>
-                <h4 class="modal-title" id="myModalLabel" style=""><b>Allow my team to send you some great resources.</b></h4>
-              </div>
-              <div class="modal-body">
-                <form class="form-group" action="" id="subscribeForm">
-                  <br>
-                  <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <input type="hidden" name="action_mail" value="subscribeme"/>
-                      <input type="text" class="form-control input-lg" name="subscribe_name" id="subscribe_name" placeholder="Enter Your Full Name"><br>
-                      <input type="email" class="form-control input-lg" name="subscribe_email" id="subscribe_email" placeholder="Enter Your Email Id">
-                      <p class="text-center">Allow my Data Science team to call and understand your study requirements.</p>
-                      <input type="number" name="subscribe_contact" id="subscribe_contact" class="form-control input-lg" placeholder="Enter Your Contact Number">
-                    </div>
-                  </div>
-                  <div class="row">
-                  <button type="button" id="subscribeme" class="btn btn-success btn-lg center-block block-center" style="padding-top:15px;border-radius:0px;">Subscribe</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-      </div>
-    </div>
-
-    <!--Action Resultant Modal -->
-    <div class="modal fade" id="actionsModal" tabindex="-1" role="dialog" aria-lebelledby="Subscribe us">
-    <div class="modal-content">
-          <div class="modal-header text-center">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="badge" style="background-color:#000;">×</span></span></button>
-                <h4 class="modal-title" id="myModalLabel" style="color:#28a745;"><b>Would get in touch with you very soon</b></h4>
-          </div>
-          <div class="modal-body text-center" id="displayinModal">
-          </div>
-    </div>
-    </div>
-
-    <!-- SCRIPTS  Start-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
-
-    
-
-
-    <script>
-      /* Validation JS Function For Login */
-      function validateLogin() {
-        var email = document.forms["loginForm"]["email"].value;
-        var password = document.forms["loginForm"]["password"].value;
-        var passlen = password.length.value;
-
-
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-        if (email == "" || email == null) {
-          alert("Please Enter Your Email ID");
-          return false;
-        } else if (reg.test(email) == false) {
-          alert("Invalid Email Address");
-          return false;
-        } else if (password == "" || password == null) {
-          alert("Please Enter Your Password");
-          return false;
-        } else if (password.length < 8) {
-          alert("Password length must be grater than 8 characters.");
-          return false;
-        }
-
-      }
-
-      /* Validation JS Function For Registration */
-      function validateRegister() {
-        var name = document.forms["registerForm"]["name"].value;
-        var email = document.forms["registerForm"]["emailid"].value;
-        var password = document.forms["registerForm"]["password"].value;
-        var confirmpassword = document.forms["registerForm"]["confirm_password"].value;
-        var contact = document.forms["registerForm"]["contact"].value;
-
-        var phoneno = /^[0-9]*$/;
-
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-        if (name == "" || name == null) {
-          alert("Please Enter Your Name");
-          return false;
-        } else if (email == "" || email == null) {
-          alert("Please Enter Your Email ID");
-          return false;
-        } else if (reg.test(email) == false) {
-          alert("Invalid Email Address");
-          return false;
-        } else if (password == "" || password == null) {
-          alert("Please Enter Your Password");
-          return false;
-        } else if (password.length < 8) {
-          alert("Password length must be greater than 8 characters");
-          return false;
-        } else if (confirmpassword == "" || confirmpassword == null) {
-          alert("Confirm Password should not be empty");
-          return false;
-        } else if (password !== confirmpassword) {
-          alert("Your password and confirmation password do not match.");
-          return false;
-        } else if (contact == "" || contact == null) {
-          alert("Please Enter Your Contact Number");
-          return false;
-        } else if (phoneno.test(contact) == false) {
-          alert("Please Enter Valid Contact Number");
-          return false;
-        }
-      }
-
-      /* Validation JS Function For Expert Registration */
-      function validateExpert() {
-        var e_name = document.forms["expertForm"]["ie_name"].value;
-        var e_skill = document.forms["expertForm"]["ie_skill"].value;
-        var e_mobile = document.forms["expertForm"]["ie_mobile"].value;
-        var e_email = document.forms["expertForm"]["ie_email"].value;
-
-        var phoneno = /^[0-9]*$/;
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-        if (e_name == "" || e_name == null) {
-          alert("Please Enter Your Name");
-          return false;
-        } else if (e_skill == "" || e_skill == null) {
-          alert("Please Enter Your Skills");
-          return false;
-        } else if (e_mobile == "" || e_mobile == null) {
-          alert("Please Enter Your Mobile No.");
-          return false;
-        } else if (phoneno.test(e_mobile) == false) {
-          alert("Please Enter Valid Mobile No.");
-          return false;
-        } else if (e_email == "" || e_email == null) {
-          alert("Please Enter Your Email ID");
-          return false;
-        } else if (reg.test(e_email) == false) {
-          alert("Invalid Email Address");
-          return false;
-        }
-
-      }
-
-      
-
-
-      $(document).ready(function() {
-
-        $(".toggle-password").click(function() {
-          $(this).toggleClass("fa-eye fa-eye-slash");
-          var x = document.getElementById("password");
-          if (x.type === "password") {
-            x.type = "text";
+    <script defer>
+      $(function() {
+        var topOfOthDiv = $(".hideshare").offset().top;
+        $(window).scroll(function() {
+          if ($(window).scrollTop() > topOfOthDiv) { //scrolled past the other div?
+            $(".share").hide(); //reached the desired point -- show div
           } else {
-            x.type = "password";
+            $(".share").show();
           }
         });
-
-        
       });
 
     </script>
-    <!-- SCRIPTS END -->
-
-    <script>
-      function validateContact() {
-        var name = document.forms["contactForm"]["name"].value;
-        var mobile = document.forms["contactForm"]["mobile"].value;
-        var email = document.forms["contactForm"]["mail_id"].value;
-        var purpose = document.forms["contactForm"]["purpose"].value;
-        var captcha = document.forms["contactForm"]["code"].value;
-
-        var phoneno = /^\d{10}$/;
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-        if (name == "" || name == null) {
-          alert("Please Enter Your Name");
-          return false;
-        } else if (mobile == "" || mobile == null) {
-          alert("Please Enter Your Mobile Number");
-          return false;
-        } else if (phoneno.test(mobile) == false) {
-          alert("Please Enter Valid Mobile Number");
-          return false;
-        } else if (email == "" || email == null) {
-          alert("Please Enter Your Email ID");
-          return false;
-        } else if (reg.test(email) == false) {
-          alert("Invalid Email Address");
-          return false;
-        } else if (purpose == "" || purpose == null) {
-          alert("Please Enter Your Purpose");
-          return false;
-        } else if (purpose.length > 100) {
-          alert("You can not enter more than 100 characters");
-          return false;
-        } else if (captcha == "" || captcha == null) {
-          alert("Please Enter Captcha Code");
-          return false;
-        }
-
-      }
-
-      function validateHiring() {
-        var companyname = document.forms["hiringForm"]["company_name"].value;
-        var hrname = document.forms["hiringForm"]["hr_name"].value;
-        var contact = document.forms["hiringForm"]["contact"].value;
-        var email = document.forms["hiringForm"]["mail_id"].value;
-        var requirement = document.forms["hiringForm"]["requirement"].value;
-        var captcha = document.forms["hiringForm"]["code"].value;
-
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-        if (companyname == "" || companyname == null) {
-          alert("Please Enter Your Company Name");
-          return false;
-        } else if (hrname == "" || hrname == null) {
-          alert("Please Enter HR Name");
-          return false;
-        } else if (contact == "" || contact == null) {
-          alert("Please Enter Contact Number");
-          return false;
-        } else if (email == "" || email == null) {
-          alert("Please Enter Your Email ID");
-          return false;
-        } else if (reg.test(email) == false) {
-          alert("Invalid Email Address");
-          return false;
-        } else if (requirement == "" || requirement == null) {
-          alert("Please Enter Your Requirement");
-          return false;
-        } else if (requirement.length > 100) {
-          alert("You can not enter more than 100 characters");
-          return false;
-        } else if (captcha == "" || captcha == null) {
-          alert("Please Enter Captcha Code");
-          return false;
-        }
-
-      }
+    <script defer>
+      $(function() {
+        var topOfOthDiv = $(".hideshare2").offset().top;
+        $(window).scroll(function() {
+          if ($(window).scrollTop() > topOfOthDiv) { //scrolled past the other div?
+            $(".share2").hide(); //reached the desired point -- show div
+          } else {
+            $(".share2").show();
+          }
+        });
+      });
 
     </script>
-    <script>
-      // $(window).on("load", function() {
-      //   if ($.cookie('subscribe') == null) {
-      //     setTimeout(function() {
-      //       $('#subscribeModal').modal('show');
-      //     }, 8000);
-      //   }
-      // });
+    <style>
+      @media screen and (min-width: 768px){ .container .jumbotron,
+      .container-fluid .jumbotron {
+        padding-right: 50px;
+        padding-left: 50px;
+      }
 
-      // console.log("hello world");
+      .image-props img {
+        filter: contrast(1.8) brightness(1.5) grayscale(1);
+      }
 
-  
+      .image-props figure:before {
+        z-index: 3;
+        mix-blend-mode: overlay;
+        box-shadow: 0 0 200px black inset;
+      }
 
+      .image-propsnlp img {
+        filter: contrast(1.8) brightness(1.5) grayscale(0.4);
+      }
 
-    // Ajax Call for Subscription
-    // $(document).on('click', '#subscribeme', function(){
-    //   var formdata = $("#subscribeForm").serialize();
-    //   console.log(formdata)
-    //   var subdata_e = document.getElementById("subscribe_email").value;
-    //   var subdata_n = document.getElementById("subscribe_name").value;
-    //   var subdata_c = document.getElementById("subscribe_contact").value;
-    //   console.log(subdata_e);
-    //   console.log(subdata_n);
-    //   console.log(subdata_c);
-    //   if(subdata_e == "" || subdata_e == null && subdata_n == "" || subdata_n == null && subdata_c == "" || subdata_c == null){
-    //     alert("Please enter all details");
-    //   }else{
-    //     $(#subscribeModal).modal('hide');
-    //     $.ajax({
-    //       url:'subscribeus.php',
-    //       method:'post',
-    //       data: formdata,
-    //       success:function(){
-    //         $("#displayinModal").html(data);
-    //         $('#actionsModal').modal('show');
-    //       }
-    //     });
-    //   }
-    // });
-    </script>
+      .image-propsnlp figure:before {
+        z-index: 3;
+        mix-blend-mode: overlay;
+        box-shadow: 0 0 200px black inset;
+      }
 
+      .move-left {
+        position: absolute;
+        left: -220%;
+      }
 
-    <!--End of Tawk.to Script-->
+      button {
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+      }
 
-    <!--<div class="training hidden-xs hidden-sm">-->
-    <!--  <p>Register for free : training - <a href="https://goo.gl/forms/D1MXNNbAnxdLers72" target="_blank"><b>here</b></a></p>-->
-    <!--  <p><a href="https://drive.google.com/file/d/0B4rCFkKCsCeKc0pDZDdQY3dmVG8/view" target="_blank"><b>Download Information Brochure</b></a></p>-->
-    <!--</div>-->
-    <!--<div class="codeint hidden-xs hidden-sm" style="margin-left:-5px;margin-bottom:-27px;">-->
-    <!--  <p>-->
-    <!--    <p>-->
-    <!--      <Strong>Coding<br><br>Internships</strong>-->
-    <!--    </p>-->
-    <!--    <p><a href="https://internship.suvenconsultants.com/" target="_blank"><b>Apply Here</b></a></p>-->
+      .btn,
+      .label,
+      .label-primary,
+      .enrollbtn {
+        padding-top: -2px !important;
+        padding-bottom: -2px !important;
+      }
 
+      .exploregreen {
+        position: relative !important;
+        background-color: #00ab6b !important;
+      }
 
-    <!--</div>-->
-    <!--<div class="freshers hidden-sm hidden-xs" style="margin-left:-5px; line-height:10px;">-->
-    <!--  <p><Strong>Freshers</strong></p>-->
-    <!--  <p><a href="https://freshers.suvenconsultants.com/" target="_blank" style="font-size:11px;"><b>Apply Here</b></a></p>-->
-    <!--</div>-->
+      .exploregreen:hover {
+        position: relative !important;
+        background-color: #00AB03 !important;
+        color: white;
+        border-radius: 0.25em;
+        color: white;
+        border-radius: 0.25em;
+      }
 
+      .gridcard {
+        max-width: 232px !important;
+      }
+
+      }
+      
+
+    </style>
+    <style>
+        /*Media queries*/
+        @media screen and (max-width: 600px) {
+              .share {
+                text-align: center;
+                margin-top: 14px !important;
+                border: none;
+                border-radius: 10px;
+                width: 100%;
+            }
+            .float{
+            top:85% !important;
+            left: 85%;
+            position: fixed !important;
+            z-index: 550;
+            }
+            
+            .meright {
+             
+                /* right: 1%; */
+                top: 15%;
+                /* padding-left: 35px; */
+                /*padding: 42px;*/
+                text-align: center;
+                /*margin: 0 auto;*/
+                left:-25px;
+                
+            }
+            
+            .fiximg{
+                position: relative;
+                right:26px !important;
+            }
+            
+            
+            .col-md-offset-2{
+             margin-top: 1200px;  
+             width: 90%;
+            }
+            .fa, .fa-arrow-right, .fa-2x, .arrow1{
+                top:678px !important;
+                left:18px;
+            }
+            
+            .herebtn{
+                margin-left:42px !important;
+            }
+            
+            .firstheading, .secondheading{
+                margin-top: 10%;
+                margin-left: 5% !important;
+                font-size: 25px;
+                font-weight: bolder;
+            }
+            
+            #microcourses{
+                margin: 0 auto !important;
+                
+            }
+            
+            .eachlistsub{
+                min-width:400px !important;
+            }
+            
+            .smcontent{
+                padding-left:15% !important;
+            }
+            .smcontent img{
+                position: relative !important;
+                left: 54px !important;
+            }
+            
+            .list-group-item {
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: 30px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        
+        .subjects1 .label, .label-primary {
+            background: #55aef7 !important;
+            color: white;
+            border-radius: 0.25em;
+            margin-left: 6px;
+            padding: 14px 15px 5px 15px !important;
+            color: white;
+            border-radius: 0.25em;
+            height: 40px;
+            font-size: 13px;
+        }
+        
+        .enrollbtn, .exploregreen{
+          left: 00px !important;
+          bottom: 00px !important;
+          float: right;
+      }
+      
+      .exploregreen {
+        position: relative !important;
+        background-color: #00ab6b !important;
+      }
+
+      .exploregreen:hover {
+        position: relative !important;
+        background-color: #00AB03 !important;
+        color: white;
+        border-radius: 0.25em;
+        color: white;
+        border-radius: 0.25em;
+      }
+      
+      .enrollbtn {
+        background-color: #34495e !important;
+        color: #ffbb00 !important;
+      }
+
+      .enrollbtn:hover {
+        background-color: #337ab7 !important;
+        color: #ffbb00;
+        border-radius: 0.25em;
+        color: #ffbb00;
+        border-radius: 0.25em;
+      }
+      
+      .disclaimer{
+            margin-left: -20% !important;
+            font-size: 13px;
+            margin-top: -36px;
+            margin-right: 10px !important;
+            color: gray;
+          }
+        .successstories{
+            margin-left: 15%;
+            margin-right: -5%;
+        }
+        .successstories img{
+            align-content: center;
+        }
+        
+        .successstories span, p{
+            font-size: 13px;
+        }
+        
+        .successstories img{
+            margin-left:6% !important;
+        }
+        
+        .headng{
+            font-size:36px !important;
+            font-weight:bolder !important;
+        }
+        
+        .fluidmargin{
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: 0;
+                margin-left: 0;
+                margin-bottom: 60px !important;
+        }
+        
+        .gridcard {
+            max-width: 500px !important;
+            max-height: 500px !important;
+            margin-left: 9px;
+        }
+        
+        .style_prevu_kit2 {
+            display: inline-block;
+            border: 0;
+            width: 300px;
+            height: 350px;
+            margin: 6px;
+            position: relative;
+            -webkit-transition: all 200ms ease-in;
+            -webkit-transform: scale(1);
+            -ms-transition: all 200ms ease-in;
+            -ms-transform: scale(1);
+            -moz-transition: all 200ms ease-in;
+            -moz-transform: scale(1);
+            transition: all 200ms ease-in;
+            transform: scale(1);
+        }
+        
+        .style_prevu_kit2 img{
+                width: 65%;
+                margin: auto;
+                padding-bottom: 0;
+        }
+        
+        .gridrow{
+            margin-left: 0px !important;
+        }
+        .jumbotron p {
+            margin-bottom: -20px !important;
+            font-size: 19px !important;
+            font-weight: 200 !important;
+            padding: 20px !important;
+            margin-top: -41px !important;
+        }
+        
+        .style_prevu_kit2 img {
+            width: 65%;
+            margin: auto;
+            margin-top: -17px !important;
+        }
+        
+        .x{
+            margin-top: -40px !important;
+        }
+        
+        .btnj{
+            margin-top: -70px !important;
+        }
+        
+        }
+      
+        
+        
+        
+        /*Media queries*/
+        @media screen and (max-width: 360px) {
+              .share {
+                text-align: center;
+                margin-top: 14px !important;
+                border: none;
+                border-radius: 10px;
+                width: 100%;
+            }
+            .float{
+            top:85% !important;
+            left: 85%;
+            position: fixed !important;
+            z-index: 550;
+            }
+            
+            .meright {
+             
+                /* right: 1%; */
+                top: 15%;
+                /* padding-left: 35px; */
+                /*padding: 42px;*/
+                text-align: center;
+                /*margin: 0 auto;*/
+                left:-25px;
+                
+            }
+            
+            .fiximg{
+                position: relative;
+                right:26px !important;
+            }
+            
+            
+            .col-md-offset-2{
+             margin-top: 1200px;  
+             width: 90%;
+            }
+            .fa, .fa-arrow-right, .fa-2x, .arrow1{
+                top: 736px !important;
+                left:18px;
+            }
+            
+            .herebtn{
+                margin-left: 0px !important;
+            }
+            
+            .firstheading, .secondheading{
+                margin-top: 10%;
+                margin-left: 5% !important;
+                font-size: 25px;
+                font-weight: bolder;
+            }
+            
+            #microcourses{
+                margin: 0 auto !important;
+                
+            }
+            
+            .eachlistsub{
+                min-width:400px !important;
+            }
+            
+            .smcontent {
+                padding-left: 7% !important;
+                margin-right: 46px;
+            }
+            .smcontent img{
+                position: relative !important;
+                left: 54px !important;
+            }
+            
+            .list-group-item {
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: 30px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        
+        .subjects1 .label, .label-primary {
+            background: #55aef7 !important;
+            color: white;
+            border-radius: 0.25em;
+            margin-left: 6px;
+            padding: 14px 15px 5px 15px !important;
+            color: white;
+            border-radius: 0.25em;
+            height: 40px;
+            font-size: 13px;
+        }
+        
+        .enrollbtn, .exploregreen{
+          left: 00px !important;
+          bottom: 00px !important;
+          float: right;
+      }
+      
+      .exploregreen {
+        position: relative !important;
+        background-color: #00ab6b !important;
+      }
+
+      .exploregreen:hover {
+        position: relative !important;
+        background-color: #00AB03 !important;
+        color: white;
+        border-radius: 0.25em;
+        color: white;
+        border-radius: 0.25em;
+      }
+      
+      .enrollbtn {
+        background-color: #34495e !important;
+        color: #ffbb00 !important;
+      }
+
+      .enrollbtn:hover {
+        background-color: #337ab7 !important;
+        color: #ffbb00;
+        border-radius: 0.25em;
+        color: #ffbb00;
+        border-radius: 0.25em;
+      }
+      
+      .disclaimer{
+            margin-left: -20% !important;
+            font-size: 13px;
+            margin-top: -36px;
+            margin-right: 10px !important;
+            color: gray;
+          }
+        .successstories{
+            margin-left: 15%;
+            margin-right: -5%;
+        }
+        .successstories img{
+            align-content: center;
+        }
+        
+        .successstories span, p{
+            font-size: 13px;
+        }
+        
+        .successstories img{
+            margin-left:6% !important;
+        }
+        
+        .headng{
+            font-size:36px !important;
+            font-weight:bolder !important;
+        }
+        
+        .fluidmargin{
+                padding-right: 0px;
+                padding-left: 0px;
+                margin-right: 0;
+                margin-left: 0;
+                margin-bottom: 60px !important;
+        }
+        
+        .gridcard {
+            max-width: 500px !important;
+            max-height: 500px !important;
+            margin-left: 9px;
+        }
+        
+        .style_prevu_kit2 {
+            display: inline-block;
+            border: 0;
+            width: 300px;
+            height: 350px;
+            margin: 6px;
+            position: relative;
+            -webkit-transition: all 200ms ease-in;
+            -webkit-transform: scale(1);
+            -ms-transition: all 200ms ease-in;
+            -ms-transform: scale(1);
+            -moz-transition: all 200ms ease-in;
+            -moz-transform: scale(1);
+            transition: all 200ms ease-in;
+            transform: scale(1);
+        }
+        
+        
+        
+        .style_prevu_kit2 img{
+                width: 65%;
+                margin: auto;
+                padding-bottom: 0;
+        }
+        .style_prevu_kit2 p{
+                font-weight:bolder !important;
+        }
+        
+        .gridrow {
+    margin-left: -17px !important;
+}
+.gridrow p {
+    margin-left: -17px !important;
+    font-weight:bolder;
+}
+
+        .jumbotron p {
+            margin-bottom: -20px !important;
+            font-size: 19px !important;
+            font-weight: bolder !important;
+            padding: 20px !important;
+            margin-top: -41px !important;
+        }
+        
+        .style_prevu_kit2 img {
+            width: 65%;
+            margin: auto;
+            margin-top: -17px !important;
+            padding-bottom: 0;
+        }
+        
+        .x{
+            margin-top: -40px !important;
+        }
+        
+        .btnj{
+            margin-top: -70px !important;
+        }
+        
+        }
+        
+    </style>
+  </head>
+
+  <body>
+    <!-- Begin Article
+================================================== -->
+    <div class="container ">
+      <div class="row">
+        <img class="img-responsive hidden-sm hidden-xs" style="margin:0px; max-width:120%;min-width:100%;" height="60px" src="https://yt3.ggpht.com/MVb4FIpLMFN3HJ7RpIzIZK3IN9wLPjdZDYc8f-Q1smrBxFHKZAvSUTXA28aT5Palwslgkc9bzA=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" />
+        <img class="img-responsive hidden-lg hidden-md" style="margin-top:4%;" height="60px" src="https://yt3.ggpht.com/MVb4FIpLMFN3HJ7RpIzIZK3IN9wLPjdZDYc8f-Q1smrBxFHKZAvSUTXA28aT5Palwslgkc9bzA=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj" />
+        <!-- Begin Fixed Left Share -->
+        <div class="col-md-2 col-xs-12 hidden-xs hidden-sm">
+          <div class="share hidden-sm hidden-xs">
+            <p>
+              <b>
+                <strong style="text-decoration:underline;margin-left:9px;font-size:26px;">Queries ?</strong>
+              </b>
+              <br>
+              mail us
+              <br><button type="button" class="btn" onclick="window.open('https://mail.google.com/mail/u/0/?view=cm&fs=1&to=rocky@suvenconsultants.com&su=Query%20about%20elearning%20course&tf=1')" href="" target="_blank">here</button></p>
+            <p><span style="text-decoration:underline;">OR</span><br>For Technical guidance Chat with<br>Rocky Sir<br>
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+              <a style="bottom: 123px !important;" href="https://api.whatsapp.com/send?phone=919892544177&text=Hello%20Sir%21%20I%20need%20some%20technical%20guidance" class="float" target="_blank">
+                <i class="fa fa-whatsapp my-float"></i>
+              </a>
+              &nbsp; 9892544177</p>
+          </div>
+        </div>
+        <div class="col-md-2 col-xs-12 hidden-lg hidden-md">
+          <div class="share2 hidden-md hidden-lg">
+            <p>
+              <b>
+              </b>
+              <br>
+            <p>
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+              <a style="bottom: 123px !important;" href="https://api.whatsapp.com/send?phone=919892544177&text=Hello%20Rocky%20Sir%21%20I%20need%20some%20technical%20guidance" class="float" target="_blank">
+                <i class="fa fa-whatsapp my-float"></i>
+              </a>
+              </p>
+          </div>
+        </div>
+        <!-- End Fixed Left Share -->
+        <!-- Begin Fixed RIght Share -->
+        <div class="col-md-3 col-xs-12 meright" style="float:right;position:absolute;">
+          <h3 class="text-success text-center shiftme"><span style="font-weight:bolder;">Data Science</span><br> team at <span style="font-weight:bolder;">Suven</span></h3>
+          <div class="">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                  <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <img src="https://datascience.suvenconsultants.com/images/testimonials/1per.jpg" class="img-circle fiximg" alt="" width=80 height=80 style="margin-rignt:-5px;">
+                  </span>
+                  <div class="row">
+                    <span class="text-justify text-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:11px; margin-left:24px;">
+                      <b class="text-info applypads" style="font-weight: bolder;font-size:1.2rem;">Rocky Jagtiani</b> Technology trainer to companies like Accenture , Morgan Stanley, EY. Have trained more than 18000 candidates in 0-3 years work-ex category. Having 18+ of years of training experience. Would be teaching most of the subjects under data science domain. Specializes in Python , ML and NLP.<br><br><br><br>
+                    </span></div>
+                </div>
+              </div><br><br><br><br>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                  <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <img src="https://datascience.suvenconsultants.com/images/testimonials/2per.jpg" class="img-circle fiximg" alt="" width=80 height=80 style="margin-rignt:-5px;">
+                  </span>
+                  <div class="row">
+                    <span class="text-justify text-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:11px; margin-left:24px;">
+                      <b class="text-info applypads" style="font-weight: bolder;font-size:1.2rem;">Niraj Sharma</b> Presently Data Analyst at NeoSoft (CMM level 5). An expert in R programming. An active contributor at Kaggle Data Analytics using R competitions. Having 3+ years of training experience. Would be teaching Statistics and Data Analytics using R in this course.<br><br><br><br>
+                    </span></div>
+                </div>
+              </div><br><br><br><br><br><br>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                  <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <img src="https://datascience.suvenconsultants.com/elearning/assets/imgm/pankajsharma.JPG" class="img-circle fiximg" alt="" width=80 height=80 style="margin-rignt:-5px;">
+                  </span>
+                  <div class="row">
+                    <span class="text-justify text-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:11px; margin-left:24px;">
+                      <b class="text-info applypads" style="font-weight: bolder;font-size:1.2rem;">Pankaj Sharma</b> Pankaj Sharma is presently Senior Software Engineer at Mphasis. Had worked for 6.5 years as a consultant at Capgemini India & UK both. An active contributor at Kaggle ML-NLP-OpenCV competitions. Having ranked with in 500 in most competitions.<br><br><br><br>
+                    </span></div>
+                </div>
+              </div><br><br><br><br><br><br>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                  <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <img src="./assets/imgm/kranjekar.jpg" class="img-circle fiximg" alt="" width=80 height=80 style="margin-rignt:-5px;">
+                  </span>
+                  <div class="row">
+                    <span class="text-justify text-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:11px; margin-left:24px;">
+                      <b class="text-info applypads" style="font-weight: bolder;font-size:1.2rem;">Hoshang Karanjekar</b> is MTech in Computer Science specializing in AI domain. He works for Viacom18 Media Pvt Ltd. Has a total experience of 4+ years. A problem solver on kaggle. Specializes in FLASK, AWS and deploying ML models on the cloud.<br><br><br><br>
+                    </span></div>
+                </div>
+              </div><br><br><br><br><br><br>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">
+                  <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <img src="https://datascience.suvenconsultants.com/images/testimonials/4per.jpg" class="img-circle fiximg" alt="" width=80 height=80 style="margin-rignt:-5px;">
+                  </span>
+                  <div class="row">
+                    <span class="text-justify text-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:11px; margin-left:24px;">
+                      <b class="text-info applypads" style="font-weight: bolder;font-size:1.2rem;">Simran Jagtiani</b> Presently Head of HR & Operations , awarded as Women Entrepreneur of the year in 2011. Having mentored more than 5000 participants in the 0-3 years WorkEx category and having successfully placed all of them as IT professional.<br><br>
+                    </span></div>
+                </div>
+              </div><br><br><br><br><br><br>
+            </div>
+          </div>
+        </div>
+        <!-- End Fixed Right Share -->
+        <!-- Begin Post -->
+        <div class="col-md-8 col-md-offset-2 col-xs-12" style="padding-right:4%;">
+          <br><br>
+          <div class="mainheading">
+            <h3 class="posttitle"><span style="color:rgb(56, 118, 29);font-weight:bolder;">2 mins please....</span><span style="font-weight:bolder;"> Let us get Introduced..</span></h3>
+          </div>
+          <!-- Begin Post Content -->
+          <div class="article-post">
+            <p style="font-size:15px;">Well, let us introduce ourselves. We @Suven are a dedicated team of trainers, with Mr. Rocky Jagtiani heading the team. Here is his <a style="text-decoration:underline;" href="https://www.linkedin.com/in/rocky-jagtiani-3b390649/" target="_blank">linked-in profile</a> for details. We are very popular in Mumbai for our "Master's in Data Science" programme with <b style="background-color:yellow;">&nbsp;100% placement calls and 200% ROI&nbsp;</b>. Please <u>Google</u> on "suven consultants reviews" or read some LI post <a style="text-decoration:underline;" href="https://www.linkedin.com/posts/suven-consultants-and-technology-pvt-ltd_fluidai-suvenml-webdevelopment-activity-6639799014827102209--0m9" target="_blank">here</a>, <a style="text-decoration:underline;" href="https://www.linkedin.com/posts/suven-consultants-and-technology-pvt-ltd_fluidai-suvenml-webdevelopment-activity-6639799014827102209--0m9" target="_blank">here</a> or <a style="text-decoration:underline;" href="https://www.linkedin.com/posts/rocky-jagtiani-3b390649_nmimsuniversity-students-faculties-activity-6622504323341443073-W3-P" target="_blank">here</a>.</p>
+            <p style="font-size:15px;">Many students and working professionals cannot make it to our class room training programmes (<em style="color:silver;">which don't cost lacs like that of UpGrad or GreatLearning or ... </em>) due to distance and time constraints.</p>
+            <p style="font-size:15px;">Our team practically gets one request per day from students, College TPO's and IT support staff for <u>our data science courses</u> over Linked-in. <b style="background-color:yellow;">&nbsp;So here we are&nbsp;</b> with our <b style="background-color:yellow;">&nbsp;e-learning course modules&nbsp;</b>.</p>
+            <p style="font-size:15px;">It's your turn......<b style="background-color:yellow;">&nbsp;Please introduce yourself&nbsp;
+              </b> &nbsp;&nbsp;&nbsp;<i style="color:silver;position:absolute;top:358px;" class="fa fa-arrow-right fa-2x arrow1" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button onclick="window.open('https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform')" class="btn herebtn" style="background-color:white;border:2px solid green;"><u><b>here</b></u></button></p>
+            <br><br>
+          </div>
+          <div class="mainheading">
+            <h3 class="posttitle"><span style="color:rgb(56, 118, 29);font-weight:bolder;">2 mins please....</span><span style="font-weight:bolder;"> Now about the Courses :</span></h3>
+          </div>
+          <div class="article-post">
+            <p style="font-size:15px;">Well, the SuvenML team over the last 3 years of classroom training in Data Science experienced that their target audiences are of two categories :</p>
+          </div>
+          <div class="mainheading">
+            <h4 class="posttitle"><span style="color:rgb(56, 118, 29);font-weight:bolder;"></span><span style="font-weight:bolder;">Category A.</span></h4>
+          </div>
+          <div class="article-post">
+            <p style="font-size:15px;">Students and Fresh Graduates wanting placements - post training</p>
+          </div>
+          <div class="mainheading">
+            <h4 class="posttitle"><span style="color:rgb(56, 118, 29);font-weight:bolder;"></span><span style="font-weight:bolder;">Category B.</span></h4>
+          </div>
+          <div class="article-post">
+            <p style="font-size:15px;">Working Professionals (below 4 years workEx) and Students planning for MS(in US or UK) in some data science domain.</p>
+          </div>
+          <div class="article-post">
+            <p style="font-size:15px;"><b style="font-weight:bolder;background-color:yellow;">For Category A learners we have a package of 7 subjects</b> namely Python Core programming fundamentals, SQL - Beginner to Intermediate, Python for Data Science, Machine Learning - Beginner, Machine Learning - Intermediate, Web skills for Coding Intelligent* Web application and Job-Prep Course.</p>
+            <p style="font-size:15px;">This whole package of 7 subjects has to be taken together as it leads to <b style="font-weight:bolder;background-color:yellow;">100% placements</b>. Each subject has a <b style="font-weight:bolder;background-color:yellow;">e-Certification issued after the required assessment is done</b>.</p>
+            <p style="font-size:15px;"><b style="font-weight:bolder;background-color:yellow;">For Category B learners we have many subjects to choose from.</b> One can choose one or more subjects according to skill he/she wishes to add to their profile. <b style="font-weight:bolder;background-color:yellow;">Each subject has a e-Certification issued after the required assessment</b> is done.</p>
+            <br><br>
+          </div>
+          <div class="mainheading">
+            <h3 class="posttitle"><span style="color:rgb(56, 118, 29);font-weight:bolder;">Last 1 min....</span><span style="font-weight:bolder;"> Why learn from us ?</span></h3>
+          </div>
+          <div class="article-post">
+            <p style="font-size:15px;">We promise we are better than most other online course providers out their on www. OOPs.. you think we are boosting.. not at all.</p>
+          </div>
+          <div class="hideshare"></div>
+          <div class="mainheading">
+            <h4 class="posttitle"><span style="color:rgb(56, 118, 29);font-weight:bolder;"></span><span style="font-weight:bolder;">Quick Pointers :</span></h4>
+          </div>
+          <div class="article-post">
+            <p style="font-size:13px;"><b>></b> <span style="color:rgb(56, 118, 29);font-weight:bold;">trained</span> more than 15000 learners<br>
+              <b>></b> <span style="color:rgb(56, 118, 29);font-weight:bold;">placed 78%</span> immediately with in a month of completing the Placement track.<br>
+              <b>></b> So many people speaking <span style="color:rgb(56, 118, 29);font-weight:bolder;">(good)</span> about us on social media.<br>
+              <b>></b> See <a style="text-decoration:underline;" href="https://www.linkedin.com/posts/rocky-jagtiani-3b390649_happy-blessed-databasejobs-activity-6617275475507150849-Wi6Z" target="_blank">here</a> or <a style="text-decoration:underline;" href="https://www.linkedin.com/posts/rocky-jagtiani-3b390649_spit-nlp-fdp-activity-6611635324244332544-jLbB" target="_blank">here</a> or <b>simply Google "rocky sir suven".</b><br>
+              <b>></b> <span style="color:rgb(56, 118, 29);font-weight:bolder;">Each online course has a 20% open content for you</span> to analyze our quality.<br>
+              <!--<b>></b> Yes, we don't have any Refund policy. Because we are doing our work with 100% sincerity and commitment. <span style="color:rgb(56, 118, 29);font-weight:bolder;">You don't understand concept or code talk/chat with the trainer</span>. Mr Rocky Jagtiani & entire SuvenML team  strongly believes in quality and will provide best to their learners.<br>-->
+              <b>></b> Each course has<br>
+              <b>max <span style="color:rgb(56, 118, 29);font-weight:bold;">25% Video</span></b> to explain the concepts<br>
+              <b>max <span style="color:rgb(56, 118, 29);font-weight:bold;">25% reading</span></b> on theory concepts<br>
+              <span style="font-weight:bolder;background-color:yellow;">50-60% code execution in</span> Colab Notebooks or some other IDE
+            </p>
+            <div class="mainheading">
+              <h4 class="posttitle"><span style="color:rgb(56, 118, 29);font-weight:bolder;">After-all you learn coding,</span><span style="font-weight:bolder;"> by coding !!</span></h4>
+            </div>
+            <br><br>
+          </div>
+          <div class="article-post">
+            <br>
+            <div class="container" style="margin-left:-5%;">
+              <div class="row">
+                <div class="col-lg-1 col-md-1">
+                  <!--*******************************************************************************************************************************************************************-->
+                  <div style="position:absolute;" class="move-left">
+                    <!--Testimonials start-->
+                    <div class="container text-center text-justify" style="">
+                      <br><br><br><br><br><br><br><br><br><br><br><br>
+                      <h3 class="text-success"><span style="font-weight:bolder; padding-left:24px;">Testimonials</span><br><span style="font-weight:bolder;"></span></h3><br>
+                      <div class="">
+                        <div class="row">
+                          <div class="row" style="padding-left:4%;">
+                            <div class="row">
+                              <span class="col-md-3" style="">
+                                <img src="./assets/imgm/testimonials/samiksha.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                              </span><br><br><br><br>
+                              <div class="row">
+                                <span class="text-center text-primary col-lg-3 colmd-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-2.3%;margin-left:1.1%;">
+                                  <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Pratiksha Patil</b></p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;">Rocky Sir, and his team helped me in understanding all core ML concepts.</p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">BTech(CS) | Jr. Data Analyst</p><br>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-left:4%;">
+                            <div class="row">
+                              <span class="col-md-3" style="">
+                                <img src="./assets/imgm/testimonials/nidhi.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                              </span><br><br><br><br>
+                              <div class="row">
+                                <span class="text-center text-primary col-lg-3 col-md-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-2.3%;margin-left:1.1%;">
+                                  <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Nidhi Shah</b></p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;">The Jupyter Notebooks made by SuvenML team is awesome. I enjoyed learning at SuvenML.</p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">BSci(CS) | Jr. Data Scientist </p><br>
+                                </span></div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-left:4%;">
+                            <div class="row">
+                              <span class="col-md-3" style="">
+                                <img src="./assets/imgm/testimonials/shrivats.jpg" class="img-circle fiximg" alt="" width=80 height=80 style="margin-rignt:-5px;">
+                              </span><br><br><br><br>
+                              <div class="row">
+                                <span class="text-center text-primary col-lg-3 colmd-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-2.3%;margin-left:1.1%;">
+                                  <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Sameeksha Shrivastava</b></p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;">Each course at Suven is awesome. I have done almost all.</p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">System Engineer | 5+ Years Work Exp.</p><br>
+                                </span></div>
+                            </div>
+                          </div>
+                          <div class="row" style="padding-left:4%;">
+                            <div class="row">
+                              <span class="col-md-3" style="">
+                                <img src="./assets/imgm/testimonials/akash.jpg" class="img-circle fiximg" alt="" width=80 height=80 style="margin-rignt:-5px;">
+                              </span><br><br><br><br>
+                              <div class="row">
+                                <span class="text-center text-primary col-lg-3 colmd-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-2.3%;margin-left:1.1%;">
+                                  <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Aahan Gupta</b></p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;">Learning from their courses enabled me fully to take part and excel in kaggle competitions. Great content , great teaching.</p>
+                                  <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">BE(CS) | Data Scientist</p><br>
+                                </span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--End Testimonials-->
+                  <!--********************************************************************************************************************************************************************-->
+                </div>
+                <span id="onlinecourses"></span>
+                <!--SECTION1 MICROCOURSES FOR LG MD-->
+                
+                <h3 class="text-center firstheading" style="margin-top:10%;margin-left:-22%;font-size:25px; font-weight:bolder;"><strong><span style="color:#28a745;">Package of 7 courses</span><span style="">&nbsp;for Freshers & Non-CS candidates&nbsp;</span><span style="color:#28a745;">seeking Placements</span></strong></h3>
+                <h4 class="posttitle text-center secondheading" style="font-size:16px;color:gray;margin-left:-23%;">Placement Oriented "Data Science Track" with Web Implementation skills</h4><br><br><br>
+                <div id="" class="col-lg-9 col-md-9" style="margin-left:9%;">
+                  <div class="card col-lg-10 col-md-10 col-xs-10 col-sm-10 eachlistsub" style="margin-left:0%;">
+                    <ul class="list-group list-group-flush">
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+                        <li class="list-group-item style_prevu_kit smcontent">
+                          <div class="row">
+                            <div class="col-md-2"><img src="./images/jsocPython.png" width="135" height="130" class="rounded img-fluid float-left" alt="..."></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-9"><span style="margin-left:-5%;margin-right:7%;" class="badge badge-primary badge-pill">A</span><span style="margin-left:4%;display:inline;"><b style="margin-left:-10%;margin-top:9px;font-size:16px;">Python Core programming fundamentals</b><br>
+                                <p style="margin-left:-5%;font-size:11px;margin-top:2px;margin-right:5px;color:gray;">Datatypes & their build-in functions, Control Statements, Reading/Writing from files, Exception Handling, Regex & its daily application, Classes & Objects. Two Mini projects for practice</p>
+                              </span></div>
+                            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:450px;bottom:1px;" type="button" id="btnadd2" class="label label-primary enrollbtn">
+                              <span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List
+                            </a>
+                          </div>
+                        </li>
+                      </a>
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+                        <li class="list-group-item style_prevu_kit smcontent">
+                          <div class="row">
+                            <div class="col-md-2"><img src="./images/sql.png" width="135" height="130" class="rounded img-fluid float-left" alt="..."></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-9"><span style="margin-left:-5%;margin-right:7%;" class="badge badge-primary badge-pill">B</span><span style="margin-left:4%;display:inline;"><b style="margin-left:-10%;margin-top:9px;font-size:16px;">SQL - Beginner to Intermediate</b><br>
+                                <p style="margin-left:-5%;font-size:11px;margin-top:2px;margin-right:5px;color:gray;">Learn the workflow for handling big datasets with BigQuery and SQL, Select, From & Where, Group By, Having & Count, Order By, As & With, Joining Data. Solving challenges on Hackerrank.com scoring at least 3 star ranking.</p>
+                              </span></div>
+                            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:450px;bottom:1px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+                          </div>
+                        </li>
+                      </a>
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+                        <li class="list-group-item style_prevu_kit smcontent">
+                          <div class="row">
+                            <div class="col-md-2"><img src="./images/jsocPythonDS.png" width="135" height="130" class="rounded img-fluid float-left" alt="..."></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-9"><span style="margin-left:-5%;margin-right:7%;" class="badge badge-primary badge-pill">C</span><span style="margin-left:4%;display:inline;"><b style="margin-left:-10%;margin-top:9px;font-size:16px;">Python for Data Science</b><br>
+                                <p style="margin-left:-5%;font-size:11px;margin-top:2px;margin-right:5px;color:gray;">NumPy Basics for Data Science, Pandas for Data Analysis, Matplotlib for Data Visualization, solving many case studies applying NumPy, Pandas and Matplotlib functions.</p>
+                              </span></div>
+                            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:501px;bottom:-13px;" type="button" id="btnadd2" class="label label-primary  exploregreen">Explore</a>
+                          </div>
+                        </li>
+                      </a>
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+                        <li class="list-group-item style_prevu_kit smcontent">
+                          <div class="row">
+                            <div class="col-md-2"><img src="./images/machinelearn.png" width="135" height="130" class="rounded img-fluid float-left" alt="..."></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-9"><span style="margin-left:-5%;margin-right:7%;" class="badge badge-primary badge-pill">D</span><span style="margin-left:4%;display:inline;"><b style="margin-left:-10%;margin-top:9px;font-size:16px;">Machine Learning - Beginner</b><br>
+                                <p style="margin-left:-5%;font-size:11px;margin-top:2px;margin-right:5px;color:gray;">Supervised & Unsupervised ML, ML pipeline, Basic Data Exploration, Encoding Categorical data, Feature Scaling, Naive Bayes Classification, Linear Regression, Decision Trees, Random Forest, Principal Component Analysis, k-Means Clustering and deploying ML models on FLASK</p>
+                              </span></div>
+                            <a href="redirectwithheader.php?&ln=4" target="_blank" style="left:501px;bottom:5px;" type="button" id="btnadd2" class="label label-primary  exploregreen">Explore</a>
+                          </div>
+                        </li>
+                      </a>
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+                        <li class="list-group-item style_prevu_kit smcontent">
+                          <div class="row">
+                            <div class="col-md-2"><img src="./images/machinelearn.png" width="135" height="130" class="rounded img-fluid float-left" alt="..."></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-9"><span style="margin-left:-5%;margin-right:7%;" class="badge badge-primary badge-pill">E</span><span style="margin-left:4%;display:inline;"><b style="margin-left:-10%;margin-top:9px;font-size:16px;">Machine Learning - Intermediate</b><br>
+                                <p style="margin-left:-5%;font-size:11px;margin-top:2px;margin-right:5px;color:gray;">Problem of underfitting & overfitting data, Cross Validation, Impute Missing Values, Feature Engineering, Feature Extraction vs. Feature Selection, Pipelines, XGBoost, lots of solved case studies to reinforce concepts.</p>
+                              </span></div>
+                            <a href="./mli?ctype=2" target="_blank" style="left:501px;bottom:3px;" type="button" id="btnadd2" class="label label-primary  exploregreen">Explore</a>
+                          </div>
+                        </li>
+                      </a>
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+                        <li class="list-group-item style_prevu_kit smcontent">
+                          <div class="row">
+                            <div class="col-md-2"><img src="./images/www.png" width="135" height="130" class="rounded img-fluid float-left" alt="..."></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-9"><span style="margin-left:-5%;margin-right:7%;" class="badge badge-primary badge-pill">F</span><span style="margin-left:4%;display:inline;"><b style="margin-left:-10%;margin-top:9px;font-size:16px;">Web skills for Coding Intelligent* Web application</b><br>(*Intelligent means integrating ML model into Web App)<br>
+                                <p style="margin-left:-5%;font-size:11px;margin-top:2px;margin-right:5px;color:gray;">Recalling HTML5, Css3, Javascript. Learning AJAX-PHP-MySQL for developing a complete end to end Web based application. Deploying ML on FLASK, Integrating ML with PHP-MySQL Web App. <b>Internship projects</b> with detailed coding steps for practice. <b>Bonus topic</b> : Intro to Node.js and when to use it.</p>
+                              </span></div>
+                            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:565px;bottom:5px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+                          </div>
+                        </li>
+                      </a>
+                      <a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+                        <li class="list-group-item style_prevu_kit smcontent">
+                          <div class="row">
+                            <div class="col-md-2"><img src="./images/interview-prep.png" width="135" height="130" class="rounded img-fluid float-left" alt="..."></div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-9"><span style="margin-left:-5%;margin-right:7%;" class="badge badge-primary badge-pill">G</span><span style="margin-left:4%;display:inline;"><b style="margin-left:-10%;margin-top:9px;font-size:16px;">Job-Prep Course</b><br>
+                                <p style="margin-left:-5%;font-size:11px;margin-top:2px;margin-right:5px;color:gray;">Tips on Quantitative & Verbal Aptitude, making your "Best looking Resume" and boosting confidence for Interviews. 2 Mock Interview calls - one Technical & other HR.<br>On successfully <b>finishing all 7 subjects</b> from A to G our company would offer <b>100% placements</b> to the candidate.</p>
+                              </span></div>
+                            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:450px;bottom:5px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+                          </div>
+                        </li>
+                      </a>
+                      <li type="none" class="text-center smcontent">
+                        <div class="row" style="padding-top:2%; padding-left:7%"><br>
+                          <div class="col-md-12"><span style="display:inline;">
+                              <b style="text-decoration:underline;margin-left:-5%; color:black;" onMouseOver="this.style.color='black'" onMouseOut="this.style.color='black'"></b>
+                              <p style="margin-left: 4%; font-size: 13px; margin-top: -36px; margin-right: 85px; color: gray;" class="disclaimer">Above courses from <span style="" class="badge badge-primary badge-pill">A</span> to <span style="" class="badge badge-primary badge-pill">G</span> form placement oriented "Data Science Track" with web implementation skills</p>
+                              <!--<ul style="list-style-type:disc;margin-left:-10%;">-->
+                              <!--  <li style="margin-top:-2%;">-->
+                              <!--    <p style="font-size:11px;color:gray;">Data Visualization and Analysis</p>-->
+                              <!--  </li>-->
+                              <!--  <li style="margin-top:-2%;">-->
+                              <!--    <p style="font-size:11px;color:gray;">Natural Language Processing - Beginner to Intermediate</p>-->
+                              <!--  </li>-->
+                              <!--  <li style="margin-top:-2%;">-->
+                              <!--    <p style="font-size:11px;margin-right:5px;color:gray;">Deep Learning for NLP & Text based applications</p>-->
+                              <!--  </li>-->
+                              <!--</ul>-->
+                            </span></div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!--New testimonials-->
+              <div class="row" style="margin-left:-17%;">
+                <div class="container" style="">
+                  <div class="row-fluid" style=":line-height:18px;">
+                    <div class="" style="padding:50px;">
+                      <div class="container successstories">
+                        <h1 class="text-center"><strong><span class="headng" style="color:#28a745;">Success</span><span style="color:#28a745;"></span> Stories</strong></h1><br>
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                          <!-- Wrapper for slides -->
+                          <div class="carousel-inner">
+                            <div class="item active">
+                              <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-5">
+                                  <img src="./images/getpic0.jpg" alt="" style="max-height:260px; max-width:90%;" class="img-fluid img-thumbnail mx-auto">
+                                </div>
+                                <div class="col-lg-5">
+                                  <h3>Gaurav Vishwakarma</h3>
+                                  <p><span style="color:#28a745;">Web Developer @ Mukesoft</span><br>Thank you soo much (Simran) Mam. Its been a great experience and also created some good memories from Suven consultants which i would never forgot.
+                                    feedback given on <a style="font-size:10px;" href="https://www.linkedin.com/feed/update/urn:li:activity:6634361999662911488/" target="_blank">https://www.linkedin.com/feed/update/urn:li:activity:6634361999662911488/</a>
+                                  </p>
+                                </div>
+                                <div class="col-lg-1"></div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-5">
+                                  <img src="./images/getpic1.jpg" alt="" style="max-height:260px; max-width:90%;" class="img-fluid img-thumbnail mx-auto">
+                                </div>
+                                <div class="col-lg-5">
+                                  <h3>Arvind Yadav</h3>
+                                  <p><span style="color:#28a745;">Web Developer @Coense Solutions #ProjectHeena</span><br>Excellent course work , brilliant teaching by Rocky sir and his team. Complete hand holding by Simran Mam in scheduling interviews & placing me.
+                                  </p>
+                                </div>
+                                <div class="col-lg-1"></div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-5">
+                                  <img src="./images/getpic2.jpg" alt="" width="80%" height="70%" class="img-fluid img-thumbnail mx-auto">
+                                </div>
+                                <div class="col-lg-5">
+                                  <h3>Rahul Sar</h3>
+                                  <p><span style="color:#28a745;">Software developer @ Accenture</span><br>I am blessed to be mentored for various subjects under Rocky Sir & his team. Their content and teaching is absolutely great in depth as well easy to understand.
+                                  </p>
+                                </div>
+                                <div class="col-lg-1"></div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-5">
+                                  <img src="./images/getpic3.jpg" width="80%" height="70%" class="img-fluid img-thumbnail mx-auto">
+                                </div>
+                                <div class="col-lg-5">
+                                  <h3>Zuhrah Sirguroh</h3>
+                                  <p><span style="color:#28a745;">Professional web scraper at dMACQ Software</span><br>Jupyter Notebooks for the entire data science track is awesome. Short Video of 10-15 mins explaining the concept to the point. Theory taking me in depth. Lots of coding examples to implement what we see & read.
+                                  </p>
+                                </div>
+                                <div class="col-lg-1"></div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <div class="row">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-5">
+                                  <img src="./images/getpic4.jpg" alt="" width="80%" height="70%" class="img-fluid img-thumbnail mx-auto">
+                                </div>
+                                <div class="col-lg-5">
+                                  <h3>Prathibha Gupta</h3>
+                                  <p><span style="color:#28a745;">Software developer @ Majesco</span><br>Team @ Suven Consultants is very dedicated , well connected with each and every student. I found their "Master in Data Science Programme" very useful in my daily job and career upgrade.
+                                  </p>
+                                </div>
+                                <div class="col-lg-1"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <ol class="carousel-indicators" style="bottom: -30px;">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                            <li data-target="#myCarousel" data-slide-to="3"></li>
+                            <li data-target="#myCarousel" data-slide-to="4"></li>
+                          </ol>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3 class="text-center" style="margin-top:9%; font-size:30px; font-weight:bolder;"><strong><span style="color:#28a745;">&nbsp;&nbsp;Independent</span><span style="">&nbsp;Courses for&nbsp;</span><span style="color:#28a745;">IT Professionals & Students*</span></strong></h3>
+    <h4 class="posttitle text-center" style="font-size:16px;color:gray;">&nbsp;&nbsp;(*Planning for MS in Data Science or Analytics)</h4><br><br><br>
+    <div class="container-fluid fluidmargin" style="margin: 0 5% 0 9%; z-index:500;">
+      <div class="row gridrow" style="margin:auto;">
+        <div class="col-lg-3 col-md-3 card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/datavis.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Data Visualization and Analysis</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:90px;bottom:-55px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+        <div class="col-lg-3 col-md-3 card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/pythonBA.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -39px;">Python for Daily Business Task Automation</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:90px;bottom:-39px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+        <div class="col-lg-3 col-md-3 card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/financeauto.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Python & ML for Finance</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:93px;bottom:-65px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+        <div class="col-lg-3 col-md-3  card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/unittesting.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Python & ML for Unit Test Automation</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:93px;bottom:-39px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+      </div>
+      <div class="row gridrow" style="margin:auto;">
+        <div class="col-lg-3 col-md-3  card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/seleniumpy.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Automating Web testing with Selenium using Python</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div><br>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:90px;bottom:15px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+        <div class="col-lg-3 col-md-3  card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/sql.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">SQL - Beginner to Intermediate</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:90px;bottom:-58px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+        <div class="col-lg-3 col-md-3  card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/sql.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Advanced SQL</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:90px;bottom:-83px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+        <div class="col-lg-3 col-md-3  card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/machinelearn.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Machine Learning - Beginner</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div>
+          <a href="./mlb?ctype=1" target="_blank" style="left:501px;bottom:5px;" type="button" id="btnadd2" class="hidden-lg hidden-md label label-primary  exploregreen">Explore</a>
+          <a href="./mlb?ctype=1" target="_blank" style="left:140px;bottom:-51px;" type="button" id="btnadd2" class="label label-primary hidden-xs hidden-sm exploregreen">Explore</a>
+        </div>
+      </div>
+      <div class="row gridrow" style="margin:auto;">
+        <div class="col-lg-3 col-md-3 card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/machinelearn.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Machine Learning - Intermediate</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div>
+          <a href="./mli?ctype=1" target="_blank" style="left:501px;bottom:5px;" type="button" id="btnadd2" class="hidden-lg hidden-md label label-primary  exploregreen">Explore</a>
+          <a href="./mli?ctype=1" target="_blank" style="left:140px;bottom:-51px;" type="button" id="btnadd2" class="label label-primary hidden-xs hidden-sm exploregreen">Explore</a>
+        </div>
+        <div class="col-lg-3 col-md-3  card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/naturallang.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Natural Language Processing - Beginner to Intermediate</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div><br>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:92px;bottom:30px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+        <div class="col-lg-3 col-md-3  card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/deeplearn.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Deep Learning for NLP & Text based applications</p>
+                <h4><b></b></h4>
+              </div>
+            </a>
+          </div>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:92px;bottom:-36px;" type="button" id="btnadd2" class="label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+        <div class="col-lg-3 col-md-3  card style_prevu_kit2 gridcard" style="margin:20px;border: 0.5px solid gainsboro;background-color:white;max-height: 260px;">
+          <div class="">
+            <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank">
+              <div class="jumbotron text-center" style="border-radius:0px;border-top: 0.5px solid gainsboro;;background-color:white;margin-top:0%;padding-top:8px;padding-bottom:0px; ">
+                <img class="img-responsive" src="./images/www.png"><br>
+                <p style="font-size:19px;margin: -25px -40px 0px -40px;">Web skills for Coding Intelligent* Web application</p>
+                <p class="x" style="font-size:11px;margin: 0px -40px 0px -40px;">(*Intelligent means integrating ML model into Web App)</p>
+              </div>
+            </a>
+          </div><br><br>
+          <a href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" style="left:92px;bottom:48px;" type="button" id="btnadd2" class="btnj label label-primary enrollbtn"><span class="checkmark checkmark-animation"></span>&nbsp;&nbsp;Join Wait List</a>
+        </div>
+      </div>
+    </div>
+    <div class="hideshare2"></div>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./assets/jsm/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="./assets/jsm/bootstrap.min.js"></script>
+    <script src="./assets/jsm/ie10-viewport-bug-workaround.js"></script>
+    <script src="./assets/jsm/mediumish.js"></script>
   </body>
-  <script>
-    function python_rar() {
-      var pwd = prompt("Please enter a Password", "");
-      if (pwd == "rocky0809Py") {
-
-        window.open("downloads/suvenPythonWorkspace.rar", "_blank");
-      } else {
-        alert("Password you enter was incorrect");
-      }
-
-    }
-
-    function python_rar2() {
-      var pwd = prompt("Please enter a Password", "");
-      if (pwd == "rocky0809ML") {
-
-        window.open("https://drive.google.com/open?id=13AOSD8amnk8iNwJmeP0pwIgKSBF12g70", "_blank");
-      } else {
-        alert("Password you enter was incorrect");
-      }
-
-    }
-
-
-    function aml(link_number) {
-
-
-      var pwd = prompt("Please enter a Password", "");
-
-      if (pwd == "Lokesh2020AmL") {
-        if (link_number == 2) {
-          window.open("downloads/part 3_Exploring and Proccessing text data.rar", "_blank");
-        } else if (link_number == 3) {
-          window.open("downloads/part 4_Converting Text to Features.rar", "_blank");
-        } else if (link_number == 4) {
-          window.open("downloads/part 5_Advanced NLP.rar", "_blank");
-        } else if (link_number == 5) {
-          window.open("downloads/part 6_Four Real_World Case Studies n Solutions.rar", "_blank");
-        } else if (link_number == 6) {
-          window.open("downloads/part 7_Deep Learning in NLP.rar", "_blank");
-        } else if (link_number == 7) {
-          window.open("https://drive.google.com/open?id=0B0sr7hUZERtfbjRzU2NyVV90X0U", "_blank");
-        } else if (link_number == 8) {
-          window.open("https://drive.google.com/open?id=0B0sr7hUZERtfaGRsXzU5UThPc0U", "_blank");
-        } else if (link_number == 9) {
-          window.open("https://drive.google.com/open?id=1EdHBcWmpDyxvDm25jiXnTLAG_EiD8ps3", "_blank");
-        } else if (link_number == 10) {
-          window.open("https://drive.google.com/open?id=1B1BHQCs594ZPPZwlP3SNPboOU6F4OkTN", "_blank");
-        } else if (link_number == 11) {
-          window.open("https://db.suvenconsultants.com/machineLearningCompletePdf.pdf", "_blank");
-        } else if (link_number == 12) {
-          window.open("https://drive.google.com/open?id=1gi_95WvtTklyDHvLfy-fiWeicYIJXB2a", "_blank");
-        }
-      } else {
-        alert("Password you enter was incorrect");
-      }
-
-
-
-
-
-    }
-
-
-
-    function hadoop_pdf(link_number) {
-      var pwd = prompt("Please enter a Password", "");
-
-      if (pwd == "niraj0605Da") {
-        if (link_number == 1) {
-          window.open("https://drive.google.com/file/d/1N3JuJ-wCTu8qyrXiQbwg-em4CynFVP59/view", "_blank");
-        } else if (link_number == 2) {
-          window.open("https://drive.google.com/open?id=1r4Z0vu64BMBOqfjjYW_VSyUp7pREztIY", "_blank");
-        } else if (link_number == 3) {
-          window.open("https://drive.google.com/open?id=1pN_cypBV9qooB0dAgqyyi1wlQQjM6CuU", "_blank");
-        } else if (link_number == 4) {
-          window.open("downloads/HDFS_MapReduce Notes.rar", "_blank");
-        } else if (link_number == 5) {
-          window.open(" https://drive.google.com/open?id=0B4rCFkKCsCeKeEVhcjFrVnYybE0", "_blank");
-        } else if (link_number == 6) {
-          window.open("https://drive.google.com/open?id=0B4rCFkKCsCeKc01ENGNldm5heHM", "_blank");
-        } else if (link_number == 7) {
-          window.open("https://drive.google.com/open?id=0B0sr7hUZERtfbjRzU2NyVV90X0U", "_blank");
-        } else if (link_number == 8) {
-          window.open("https://drive.google.com/open?id=0B0sr7hUZERtfaGRsXzU5UThPc0U", "_blank");
-        } else if (link_number == 9) {
-          window.open("https://drive.google.com/open?id=1EdHBcWmpDyxvDm25jiXnTLAG_EiD8ps3", "_blank");
-        } else if (link_number == 10) {
-          window.open("https://drive.google.com/open?id=1B1BHQCs594ZPPZwlP3SNPboOU6F4OkTN", "_blank");
-        } else if (link_number == 11) {
-          window.open("https://db.suvenconsultants.com/machineLearningCompletePdf.pdf", "_blank");
-        } else if (link_number == 12) {
-          window.open("https://drive.google.com/open?id=1gi_95WvtTklyDHvLfy-fiWeicYIJXB2a", "_blank");
-        }
-      } else {
-        alert("Password you enter was incorrect");
-      }
-    }
-
-    $('.navbar-collapse a').click(function() {
-      $(".navbar-collapse").collapse('hide');
-    });
-
-  </script>
-
-  <script src="js/main1.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
 
 </html>
+<?php include 'footer.php';?>

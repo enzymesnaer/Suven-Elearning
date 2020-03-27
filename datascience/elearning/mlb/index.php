@@ -1,7 +1,40 @@
 <?php 
-session_start();
-$_SESSION['courseid'] = 1;
-
+@session_start();
+if(isset($_SESSION["uid"])){
+//   $uid = $_SESSION["uid"];
+//   $name = $_SESSION["name"];
+//   $email = $_SESSION["email"];
+  
+$ctype = $_GET['ctype'];
+  
+if($ctype == 2){
+$courseid = 2001;
+$_SESSION['ctype'] = 2;
+$_SESSION[courseid] = $courseid;    
+ 
+}elseif($ctype == 1){
+  $courseid = 2002;
+  $_SESSION['ctype']=1;
+  $_SESSION[courseid] = $courseid;
+}
+}
+  
+  
+// }else{
+//   $uid = '';
+//   $name = '';
+//   $ctype = $_GET['ctype'];
+//   if($ctype == 2){
+//   $courseid = 2001;
+//   $_SESSION['ctype'] = 2;
+//   $_SESSION[courseid] = $courseid;    
+//   }elseif($ctype == 1){
+//   $courseid = 2002;
+//   $_SESSION['ctype']=1;
+//   $_SESSION[courseid] = $courseid;
+//   }
+// }
+include 'header.php';
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,81 +42,76 @@ $_SESSION['courseid'] = 1;
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Data Science | Machine Learning | Python | Data Analytics | R | Suven Consultants</title>
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" type="text/css" href="dist/fullpage.css" /> -->
     <meta property="og:image" itemprop="image" content="https://suvenconsultants.com/datascience/elearning/mymeta.jpg">
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" type="text/css" href="dist/fullpage.css" /> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../css/internship.css">
-    <link rel="stylesheet" href="../../css/font-awesome.css">
-    <link rel="stylesheet" href="../../css/trainers.css">
-    <link rel="stylesheet" href="../../css/timeline.css">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/internship.css">
+    <link rel="stylesheet" href="../css/font-awesome.css">
+    <link rel="stylesheet" href="../css/trainers.css">
+    <link rel="stylesheet" href="../css/timeline.css">
 
-    <!-- <script src="js/modernizr.js"></script>
-    <script src="js/jquery.flexslider-min.js"></script>
-    <script src="js/masonry.pkgd.min.js"></script> -->
+
     <!-- Modernizr -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
     <script>
-      jQuery(document).ready(function($) {
-        //create the slider
-        $('.cd-testimonials-wrapper').flexslider({
-          selector: ".cd-testimonials > li",
-          animation: "slide",
-          controlNav: false,
-          slideshow: false,
-          smoothHeight: true,
-          start: function() {
-            $('.cd-testimonials').children('li').css({
-              'opacity': 1,
-              'position': 'relative'
-            });
-          }
-        });
-
-        //open the testimonials modal page
-        $('.cd-see-all').on('click', function() {
-          $('.cd-testimonials-all').addClass('is-visible');
-        });
-
-        //close the testimonials modal page
-        $('.cd-testimonials-all .close-btn').on('click', function() {
-          $('.cd-testimonials-all').removeClass('is-visible');
-        });
-        $(document).keyup(function(event) {
-          //check if user has pressed 'Esc'
-          if (event.which == '27') {
-            $('.cd-testimonials-all').removeClass('is-visible');
-          }
-        });
-
-        //build the grid for the testimonials modal page
-        $('.cd-testimonials-all-wrapper').children('ul').masonry({
-          itemSelector: '.cd-testimonials-item'
-        });
+      $(window).on("load", function() {
+        if ($.cookie('subscribe') == null) {
+          setTimeout(function() {
+            $('#subscribeModal').modal('show');
+          }, 2000);
+        }
       });
 
     </script>
     <script type="text/javascript">
-      document.addEventListener('contextmenu', event => event.preventDefault());
+      $(document).on('click', '#subscribeme', function() {
+        var formdata = $("#subscribeForm").serialize();
+        console.log(formdata);
+        var subdata_e = document.getElementById("subscribe_email").value;
+        var subdata_n = document.getElementById("subscribe_name").value;
+        var subdata_c = document.getElementById("subscribe_contact").value;
 
+        if ((subdata_e == "" || subdata_e == null) && (subdata_c == "" || subdata_c == null) && (subdata_n == "" || subdata_n == null)) {
+          alert("Please enter all details");
+        } else {
+          $('#subscribeModal').modal('hide');
+          $.ajax({
+            url: 'subscribeus.php',
+            method: 'POST',
+            data: formdata,
+            success: function(response) {
+              $("#displayinModal").html(response);
+              $('#actionsModal').modal('show');
+            }
+          });
+        }
+
+      });
+
+    </script>
+
+
+
+    <script type="text/javascript">
+      document.addEventListener('contextmenu', event => event.preventDefault());
     </script>
 
     <style>
@@ -599,746 +627,2003 @@ $_SESSION['courseid'] = 1;
         }
       }
 
+      .subjects1 .label,
+      .label-primary {
+        background: #55aef7 !important;
+        color: white;
+        border-radius: 0.25em;
+        margin-left: 6px;
+        padding: 5px 15px 5px 15px !important;
+        color: white;
+        border-radius: 0.25em;
+        height: 40px;
+        font-size: 13px;
+      }
+
+
+      #authenticationModal .modal-header li a {
+        background-color: #2ecc71;
+        border-radius: 0px;
+        color: #fff;
+      }
+
+
+      #authenticationModal .modal-header li a:hover {
+        background-color: #2ecc71;
+        border-radius: 0px;
+        color: #fff;
+      }
+
+      #authenticationModal .modal-header .active a {
+        background-color: #34495e !important;
+        border-radius: 0px;
+        color: #fff;
+        font-weight: bold;
+      }
+
+      #authenticationModal .modal-content {
+        border-radius: 0px !important;
+      }
+
+
+      #registration {
+        margin-top: -1%;
+      }
+
     </style>
   </head>
-
-  <body style="">
-
-    <!-- nav bar -->
-
- 
-    <!-- <nav class="navbar navbar-default navbar-fixed-top"> -->
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="" style=""><img src="https://suvenconsultants.com/mainpagefiles/images/sctpl_logo.png" style="display:inline; margin-left:30px;">
-            <span>Suven Consultants & Technology Pvt. Ltd.</span></a>
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
-            <li onclick="" style="margin-left:-10px;padding-left:3px;margin-right: 20px;"><a href="https://datascience.suvenconsultants.com/elearning/" class="head_panel" style="font-size:14px">Online Courses</a></li>
-            <!--<li style="margin-left:-10px;padding-left:3px;color:#fcba03;margin-right: 20px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" class="head_panel" style="font-size:14px; color:#fcba03 !important;">-->
-            <!--    <div class="checkmark checkmark-animation"></div>&nbsp;&nbsp;Join Wait List-->
-            <!--  </a></li>-->
-            <li style="margin-left:-10px;padding-left:3px;"><a href="https://datascience.suvenconsultants.com" class="head_panel" style="font-size:14px">Login</a></li>
-
-          </ul>
-          <ul class="nav navbar-nav navbar-right hidden-lg hidden-md">
-            <li style="margin-top:-2px;"><a href="https://datascience.suvenconsultants.com/elearning/#microcourses" class="head_panel" style="font-size:14px">Online Courses</a></li>
-            <li style="margin-top:-5px; color:#fcba03;"><a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" class="head_panel" style="font-size:14px; color:#fcba03; !important">
-                <div class="checkmark checkmark-animation"></div>&nbsp;&nbsp;Join Wait List
-              </a></li>
-            <li style="margin-top:-5px;"><a href="https://datascience.suvenconsultants.com" class="head_panel" style="font-size:14px">Classroom Training</a></li>
-          </ul>
-        </div>
-      </div>
-    <!-- </nav> -->
-    <!-- <br><br> -->
-
-
-
+    <!--MAIN BODY CONTENT START-->
     
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="https://suvenconsultants.com/" style=""><img src="https://suvenconsultants.com/mainpagefiles/images/sctpl_logo.png" style="display:inline; margin-left:30px;">
-            <span>Suven Consultants & Technology Pvt. Ltd.</span></a>
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+
+        <style>
+          .indie {
+            font-family: 'Sen', sans-serif;
+          }
+
+          html,
+          body {
+            background-color: #FFF !important;
+          }
+
+          .lessons {
+            margin: -5%;
+            padding: 10%;
+            padding-left: 30px;
+          }
+
+          .selen {
+            border: 1px solid gainsboro;
+            border-radius: 5px;
+            padding: 45px;
+            padding-left: 70px;
+            padding-top: 0px !important;
+            margin-right: -73px;
+          }
+
+          ol {
+            font-weight: bolder;
+            font-size: 16px;
+            margin-top: 20px;
+          }
+
+          .subhr {
+            width: 104%;
+            border: 1px solid gainsboro;
+            position: absolute;
+            margin-left: -9.5%;
+            padding: 0;
+          }
+
+          /*Circular Svg*/
+          
+          #svg circle {
+                  stroke-dashoffset: 565.48;
+                  transition: stroke-dashoffset 1s linear;
+                  stroke: #666;
+                  stroke-width: 1em;
+                  color: green;
+                }
+                #svg #bar {
+                  stroke: #ff9f1e;
+                }
+                #cont {
+                  display: block;
+                  height: 200px;
+                  width: 200px;
+                  margin: 2em auto;
+                  box-shadow: 0 0 1em black;
+                  border-radius: 100%;
+                  position: relative;
+                }
+                #cont:after {
+                  position: absolute;
+                  display: block;
+                  height: 160px;
+                  width: 160px;
+                  left: 50%;
+                  top: 50%;
+                  box-shadow: inset 0 0 1em black;
+                  content: attr(data-pct) "%";
+                  margin-top: -80px;
+                  margin-left: -80px;
+                  border-radius: 100%;
+                  line-height: 160px;
+                  font-size: 2em;
+                  text-shadow: 0 0 0.5em black;
+                }
+                
+                /*input {*/
+                /*  color: #000;*/
+                /*}*/
+                
+                
+                /*html {*/
+                /*  height: 100%;*/
+                /*}*/
+                /*body {*/
+                /*  font-family: "Source Sans Pro", Helvetica, Arial, sans-serif;*/
+                /*  background-color: #0d0d0d;*/
+                /*  color: #fff;*/
+                /*  height: 100%;*/
+                /*  padding-top: 2em;*/
+                /*  text-align: center;*/
+                /*}*/
+          /*Circle ends*/
+
+          .fiximg {
+            margin-left: 36% !important;
+            margin-bottom: 4px;
+          }
+
+          .text-success {
+            padding-left: 57px !important;
+          }
+
+          body {
+            font-family: 'Istok Web', sans-serif;
+          }
+
+          .studtestim {
+            margin-top: 161%;
+            margin-bottom: -10px;
+          }
+
+
+          @media screen and (max-width: 600px) {
+            .smhead {
+              float: left;
+
+              color: gray;
+              margin-left: -10px !important;
+              margin-right: -110px !important;
+              margin-bottom: 0;
+              margin-top: 10px;
+              font-size: 30px;
+            }
+
+            .container-fluid>.navbar-collapse,
+            .container-fluid>.navbar-header,
+            .container>.navbar-collapse,
+            .container>.navbar-header {
+              margin-right: -30px;
+              margin-left: -15px;
+            }
+
+            .smheadnxt {
+              font-size: 30px !important;
+              margin-left: 10px !important;
+              margin-top: -12px !important;
+              margin-right: -10px !important;
+              padding: 60px !important;
+            }
+
+            .text-left {
+              text-align: center !important;
+            }
+
+            .indie1 {
+              font-size: 15px;
+              margin-top: -37px !important;
+              margin-right: -400px !important;
+              margin-left: -60px !important;
+              color: #3c763d;
+              display: block;
+              position: absolute;
+              left: -10px;
+            }
+
+
+            .smallicon {
+
+              padding: 20px;
+              margin-left: 5px;
+            }
+
+            .subhr {
+              width: 4000%;
+              border: 1px solid gainsboro;
+              position: absolute;
+              margin-left: -460%;
+              padding: 0;
+              margin-bottom: 5px !important;
+            }
+
+            .lessons {
+              margin: -7%;
+              padding-top: 20%;
+              padding-bottom: 10%;
+              padding-left: 0px !important;
+              /* font-size: 11px !important; */
+              margin-top: -5%;
+              margin-bottom: 0%;
+              /* text-align: justify; */
+            }
+
+            .smhr {
+              margin-top: 80% !important;
+            }
+
+            .col-lg-12,
+            .col-md-12 {
+              position: relative;
+              min-height: 1px;
+              padding-right: 0;
+              padding-left: 30px;
+            }
+
+            .shifthimg {
+              margin-top: 10px !important;
+            }
+
+            .topicheadings {
+              padding-right: 20% !important;
+            }
+
+
+          }
+          
+          .modal {
+         overflow-y: auto !important;
+         overflow-x: auto !important;
+        }
+        
+        .modal-open {
+         overflow: auto !important;
+        }
+        
+        .modal-open[style] {
+        padding-right: 0px !important;
+        margin-right: 0px !important;
+        }
+        
+        .loader,
+        .loader:before,
+        .loader:after {
+          border-radius: 50%;
+          width: 2.5em;
+          height: 2.5em;
+          -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+          -webkit-animation: load7 1.8s infinite ease-in-out;
+          animation: load7 1.8s infinite ease-in-out;
+        }
+        .loader {
+          color: #000;
+          font-size: 10px;
+          margin: 80px auto;
+          position: relative;
+          text-indent: -9999em;
+          -webkit-transform: translateZ(0);
+          -ms-transform: translateZ(0);
+          transform: translateZ(0);
+          -webkit-animation-delay: -0.16s;
+          animation-delay: -0.16s;
+        }
+        .loader:before,
+        .loader:after {
+          content: '';
+          position: absolute;
+          top: 0;
+        }
+        .loader:before {
+          left: -3.5em;
+          -webkit-animation-delay: -0.32s;
+          animation-delay: -0.32s;
+        }
+        .loader:after {
+          left: 3.5em;
+        }
+        @-webkit-keyframes load7 {
+          0%,
+          80%,
+          100% {
+            box-shadow: 0 2.5em 0 -1.3em;
+          }
+          40% {
+            box-shadow: 0 2.5em 0 0;
+          }
+        }
+        @keyframes load7 {
+          0%,
+          80%,
+          100% {
+            box-shadow: 0 2.5em 0 -1.3em;
+          }
+          40% {
+            box-shadow: 0 2.5em 0 0;
+          }
+        }
+
+
+        </style>
+        
+      </head>
+
+      <body >
+        <div>
+          <img class="img-responsive shifthimg" style="margin:0px;min-width:100%;" height="60px" src="https://yt3.ggpht.com/MVb4FIpLMFN3HJ7RpIzIZK3IN9wLPjdZDYc8f-Q1smrBxFHKZAvSUTXA28aT5Palwslgkc9bzA=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj">
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
-            <li style="margin-left:-10px;padding-left:3px;margin-right: 20px;"><?php
-                    if(isset($_SESSION['uid'])){
-                    
-                    
-                    echo '<li><button class="btn btn-danger" style="margin-left:13px;margin-top:15px;"><a href="logout.php" class="btn btn-danger btn-sm center-block">Logout</a></button></li>'; 
-                       
-                    }else{
-                        
-                        echo '<li><button class="btn btn-success" data-toggle="modal" data-target="#authenticationModal" style="margin-left:13px;margin-top:15px;"><b>Log In</b></button></li>'; 
-                        
-                    }
-                ?></li>
-            <li style="margin-left:-10px;padding-left:3px;color:#fcba03;margin-right: 20px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" class="head_panel" style="font-size:14px; color:#fcba03 !important;">
-                <div class="checkmark checkmark-animation"></div>&nbsp;&nbsp;Join Wait List
-              </a></li>
-
-            // <?php
-        // 		if(isset($_SESSION['uid'])){
-                              
-        //                 echo '<li>
-        //                     <ul class="dropdown-menu hidden-sm hidden-xs" style="padding:5px;">
-        //                         <li class="text-center"><p><b>'.$_SESSION['name'].'</b></p>
-        //                         <p>'.$_SESSION['email'].'</p></li>
-        //                         <li class="divider"></li>
-        //                         <a href="logout.php" class="btn btn-danger btn-sm center-block">Logout</a>
-        //                     </ul>
-                            
-        //                     <ul class="dropdown-menu hidden-lg hidden-md" style="padding:5px;">
-        //                         &nbsp;&nbsp;<a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
-        //                     </ul></li>';    
-        // 		}    
-        //         ?>
-            <li style="margin-left:-10px;padding-left:3px;"><a href="https://datascience.suvenconsultants.com" class="head_panel" style="font-size:14px">Classroom Training</a></li>
-
-          </ul>
-          <ul class="nav navbar-nav navbar-right hidden-lg hidden-md">
-            <li style="margin-top:-2px;"><?php
-                    // if(isset($_SESSION['uid'])){
-                    // echo '';
-                    // }else{
-                    //   echo '<li><button class="btn btn-success" data-toggle="modal" data-target="#authenticationModal" style="margin-left:13px;margin-top:15px;"><b>Log In</b></button></li>'; 
-                    // }
-                ?></li>
-            <?php
-        // 		if(isset($_SESSION['uid'])){
-        // 		    echo '<li class="dropdowns">
-        //                     <div class="inset" class="dropdown-toggle" data-toggle="dropdown">';
-                              
-        //                 echo '</div>
-        //                     <ul class="dropdown-menu hidden-sm hidden-xs" style="padding:5px;">
-        //                         <li class="text-center"><p><b>'.$_SESSION['name'].'</b></p>
-        //                         <p>'.$_SESSION['email'].'</p></li>
-        //                         <li class="divider"></li>
-        //                         <a href="logout.php" class="btn btn-danger btn-sm center-block">Logout</a>
-        //                     </ul>
-                            
-        //                     <ul class="dropdown-menu hidden-lg hidden-md" style="padding:5px;">
-        //                         &nbsp;&nbsp;<a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
-        //                     </ul></li>';    
-        // 		}    
-                ?>
-
-            <li style="margin-top:-5px; color:#fcba03;"><a href="https://docs.google.com/forms/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank" class="head_panel" style="font-size:14px; color:#fcba03; !important">
-                <div class="checkmark checkmark-animation"></div>&nbsp;&nbsp;Join Wait List
-              </a></li>
-            <li style="margin-top:-5px;"><a href="https://datascience.suvenconsultants.com" class="head_panel" style="font-size:14px">Classroom Training</a></li>
-          </ul>
-
-          <!---->
-
-
-
-
-          <!---->
-        </div>
-      </div>
-    </nav>
-    <br><br>
-
-
-
-    <?php 
-    include("course.php");
-    ?>
-
-    <!-- ///////////////// Start of Footer /////////////////////////// -->
-    <h3 class="text-center center-block">Companies where our students are working</h3>
-    <div class="row text-center center-block">
-
-      <div class="col-lg-2 col-md-2 text-center center-block"></div>
-      <div class="col-lg-8 col-md-8 text-center center-block">
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center>
-                <img src="../assets/imgm/icons/compns/jpm.png" style="width:auto; height:80px;" class="img-responsive">
-              </center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="../assets/imgm/icons/compns/acc.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center> <img src="../assets/imgm/icons/compns/quant.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="../assets/imgm/icons/compns/mstan.jpg" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="../assets/imgm/icons/compns/tcs.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="../assets/imgm/icons/compns/mphasis.jpg" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="../assets/imgm/icons/compns/ey.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="panel panel-default text-center center-block">
-            <div class="panel-body" style="margin:7px;">
-              <center><img src="../assets/imgm/icons/compns/here.png" style="width:auto; height:80px;" class="img-responsive"></center>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-2"></div>
-    </div>
-
-    <section id="bottom" class="navclass">
-      <div class="container-fluid hidden-xs hidden-sm" id="footer">
-        <br><br><br>
-        <div class="row">
-          <div class="col-lg-12 col-md-12 text-center center-block">
-
-            <div class="col-lg-2 col-md-2 text-left"></div>
-
-            <div class="col-lg-8 col-md-8 text-left">
-              <div class="col-md-4 text-left">
-
-                <p><a style="margin-left: 60%; font-size:13px;" href="https://datascience.suvenconsultants.com/elearning/aboutus.php" target="_blank">About Us</a></p>
-                <p><a style="margin-left: 60%; font-size:13px;" class="" href="https://www.youtube.com/user/rockyjagtiani" target="_blank">YouTube</a></p>
-                <p><a style="margin-left: 60%; font-size:13px;" class="" href="https://www.linkedin.com/in/rocky-jagtiani-3b390649/" target="_blank">LinkedIn</a></p>
-                <br><br><br><br>
-              </div>
-              <div class="col-md-4 text-left">
-
-                <p><a class="" style="margin-left: 10%;font-size:13px;" href="https://datascience.suvenconsultants.com" target="_blank">Classroom training at Mumbai</a></p>
-                <p><a class="" style="margin-left: 10%;font-size:13px;" href="#https://datascience.suvenconsultants.com/elearning">e-Learning Data Science courses</a></p>
-                <br><br><br><br>
-              </div>
-              <div class="col-md-4 text-left">
-
-                <p><a class="" style="font-size:13px;" href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank"><b style="color:#fcba03;">Join our Wait List</b></a></p>
-                <p><a class="" style="font-size:13px;" href="https://datascience.suvenconsultants.com/elearning/refundpolicy.php" target="_blank">Refund Policy</a></p>
-                <p><a class="" style="font-size:13px;" href="https://mail.google.com/mail/?view=cm&fs=1&to=rocky@suvenconsultants.com" target="_blank">Help & Support</a></p>
-                <br><br><br><br>
-
-              </div>
-              <center classs="text-center">
-                <footer style="font-size:13px;">&copy; 2020 Suven Consultants & Technology Pvt Ltd</footer>
-              </center>
-              <br><br><br>
-
-            </div>
-            <div class="col-lg-2 col-md-2 text-left"></div>
-          </div>
-
-        </div>
-
-
-        <!-- end of row -->
-      </div><!-- end of container-->
-      
-      
-      <div class="container-fluid hidden-lg hidden-md" id="footer">
-        <div class="row">
-          <div class="col-sm-12 col-xs-12 text-center center-block">
-            <!--<div class="col-sm-2 col-xs-2 text-left"></div>-->
-            <div class="col-sm-12 text-center">
-              <br>
-              <p><a style="font-size:13px;" href="https://datascience.suvenconsultants.com/elearning/aboutus.php" target="_blank">About Us</a></p>
-              <p><a style="font-size:13px;" class="" href="https://www.youtube.com/user/rockyjagtiani" target="_blank">YouTube</a></p>
-              <p><a style="font-size:13px;" class="" href="https://www.linkedin.com/in/rocky-jagtiani-3b390649/" target="_blank">LinkedIn</a></p>
-              <br>
-            </div>
-            <div class="col-sm-12 text-center">
-
-              <p><a class="" style="font-size:13px;" href="https://datascience.suvenconsultants.com" target="_blank">Classroom training at Mumbai</a></p>
-              <p><a class="" style="font-size:13px;" href="https://datascience.suvenconsultants.com/elearning">e-Learning with Micro-courses</a></p>
-              <br>
-            </div>
-            <div class="col-sm-12 text-center">
-
-              <p><a class="" style="font-size:13px;" href="https://docs.google.com/forms/u/1/d/e/1FAIpQLScPpX9SPBQkjj5xklDta_EOO0mADa-st3Zw8941ThkS5woKCQ/viewform" target="_blank"><b style="color:#fcba03;">Join our Wait List</b></a></p>
-              <p><a class="" style="font-size:13px;" href="https://datascience.suvenconsultants.com/elearning/refundpolicy.php" target="_blank">Refund Policy</a></p>
-              <p><a class="" style="font-size:13px;" href="https://mail.google.com/mail/?view=cm&fs=1&to=rocky@suvenconsultants.com" target="_blank">Help & Support</a></p>
-              <br><br>
-
-            </div>
-            <center classs="text-center">
-              <footer style="font-size:13px;">&copy; 2020 Suven Consultants & Technology Pvt Ltd</footer>
-            </center>
-            <br><br>
-          </div>
-        </div>
-        <!--<div class="row" style="margin-left: auto; margin-right: auto;">-->
-        <!--  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
-        <!--    <ul>-->
-        <!--      <h4><strong>Training Programs</strong></h4>-->
-        <!--      <li><a href="https://datascience.suvenconsultants.com" target="_blank">Masters in Data Science</a></li>-->
-        <!--      <li><a href="https://db.suvenconsultants.com" target="_blank">Database SQL+PL/SQL</a></li>-->
-        <!--      <li><a href="https://android.suvenconsultants.com" target="_blank">Mobile App Dev (Android + iOS)</a></li>-->
-        <!--      <li><a href="https://java.suvenconsultants.com" target="_blank">Java Certification</a></li>-->
-        <!--      <li><a href="https://monster.suvenconsultants.com" target="_blank">Web Technologies</a></li>-->
-        <!--      <li><a href="https://datascience.suvenconsultants.com/#dataanalytics" target="_blank">Data Analytics using R</a></li>-->
-        <!--      <li><a href="https://datascience.suvenconsultants.com/#python" target="_blank">Python (Core + Advanced)</a></li>-->
-        <!--      <li><a href="https://android.suvenconsultants.com/#section-angular" target="_blank">Angular - Firebase</a></li>-->
-        <!--      <li><a href="https://digitalmarketing.suvenconsultants.com/" target="_blank">Digital Marketing SEO+SEM</a></li>-->
-        <!--      <li><a href="https://hacking.suvenconsultants.com/" target="_blank">Ethical Hacking</a></li>-->
-        <!--      <li><a href="https://statistics.suvenconsultants.com/" target="_blank">Statistics + Excel & Tableau</a></li>-->
-        <!--      <li><a href="https://training.suvenconsultants.com/" target="_blank">List of all Training Programs</a></li>-->
-        <!--      <li><a href="https://internship.suvenconsultants.com/" target="_blank">Coding Internships</a></li>-->
-        <!--    </ul>-->
-        <!--  </div>-->
-        <!--  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
-        <!--    <ul>-->
-        <!--      <h4><strong>Recruitment Services</strong></h4>-->
-        <!--      <li><a href="https://freshers.suvenconsultants.com/" target="_blank">Fresher IT Jobs</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">IT Recruitment - Lateral</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Non-IT and Support for Lateral upto VP/GM etc.</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Employee Verification through Reference Checks</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Interview and Rejection handling services</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Salary Negotiations as per Industry norms</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Profile Mapping as per Industry norms</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#hiringModal">Complete Hand-holding Support till Joining</a></li>-->
-        <!--    </ul>-->
-        <!--  </div>-->
-        <!--  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
-        <!--    <ul>-->
-        <!--      <h4><strong>Company</strong></h4>-->
-        <!--      <li><a href="https://suvenconsultants.com/recruitment.php" target="_blank">About us</a></li>-->
-        <!--      <li><a href="https://suvenconsultants.com/JobPosting.php" target="_blank">Current Job Openings</a></li>-->
-        <!--      <li><a href="https://suvenconsultants.com/feedback.php" target="_blank">Training Feedbacks</a></li>-->
-        <!--      <li><a href="https://mentor.suvenconsultants.com/" target="_blank">Our Mentors</a></li>-->
-        <!--      <li><a href="https://www.google.co.in/search?nfpr=1&q=suven+consultants&spell=1&sa=X&ved=0ahUKEwidoubh1dXdAhWFNY8KHfrxBZoQBQgpKAA&biw=1366&bih=657#lrd=0x3be7c8afbfffffff:0xcf0cd79d3c52220a,1,,," target="_blank">Google Reviews</a></li>-->
-        <!--      <li><a href="https://www.facebook.com/suvenconsultants/reviews/?ref=page_internal" target="_blank">Facebook Reviews</a></li>-->
-        <!--      <li><a href="https://suventechnology.blogspot.com" target="_blank">Technical Blog</a></li>-->
-        <!--    </ul>-->
-        <!--  </div>-->
-        <!--  <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">-->
-        <!--    <ul>-->
-        <!--      <h4><strong>Get In Touch</strong></h4>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#addressModal">SCTPL Branches</a></li>-->
-        <!--      <li><a href="#" data-toggle="modal" data-target="#contactModal">Contact us</a><br>-->
-        <!--      <li><a href="https://www.facebook.com/suvenconsultants/" target="_blank">Facebook</a></li>-->
-        <!--      <li><a href="https://www.linkedin.com/in/rocky-jagtiani-3b390649/" target="_blank">LinkedIn For Training</a></li>-->
-        <!--      <li><a href="https://in.linkedin.com/in/simran-jagtiani-752b0347" target="_blank">LinkedIn For Recruitment</a></li>-->
-        <!--    </ul>-->
-        <!--  </div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--  <div class="social-links">-->
-        <!--    <h4>Connect with us</h4>-->
-        <!--    <a class="facebook" href="https://www.facebook.com/suvenconsultants/" target="_blank"></a>-->
-        <!--    <a class="linkedin" href="https://in.linkedin.com/in/simran-jagtiani-752b0347" target="_blank"></a>-->
-        <!--    <a class="youtube" href="https://www.youtube.com/user/rockyjagtiani" target="_blank"></a>-->
-        <!--  </div>-->
-        <!--</div> <!-- end of row -->-->
-      </div>
-    </section>
-
-
-    <!-- Popup Modal For Addresses -->
-    <div id="addressModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4><strong>SCTPL Training Room Addresses</strong></h4>
-            <h5 class="modal-title">Centralized Contact No.: <strong>+91 9870014450</strong></h5>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <address class="chembur_address">
-                </address>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <address class="borivali_address">
-                </address>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <address class="thanenew_address">
-                </address>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <address class="dadarnew_address">
-                </address>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Popup Modal For Contact US -->
-    <div id="contactModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Let us connect with you</h4>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <form name="contactForm" action="connectus.php" method="post" onsubmit="return validateContact()">
+        <span class="container hidden-sm hidden-xs">
+          <span class="col-lg-3 col-md-3 col-sm-12 col-xs-12 hidden-xs hidden-sm">
+            <div class="studtestim">
+              <br><br><br><br>
+              <!--Testimonials start-->
+              <div class="container text-center text-justify">
+                <h3 class="text-success"><span style="font-weight:bolder; padding-left:25px;margin-bottom:-20px;">Testimonials</span><br><span style="font-weight:bolder;"></span></h3><br>
+                <div class="">
                   <div class="row">
-                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                      <input type="text" class="form-control" name="name" placeholder="Enter your name" required />
+                    <div class="row" style="padding-left:4%;margin-top:-10px;">
+                      <div class="row">
+                        <span class="col-md-3">
+                          <img src="../assets/imgm/testimonials/samiksha.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                        </span><br><br><br><br>
+                        <div class="row">
+                          <span class="text-center text-primary col-lg-3 colmd-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-1%;margin-left:-25%;">
+                            <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Pratiksha
+                                Patil</b></p>
+                            <p class="text-info" style="font-size:11px;margin-top:-10px;">Rocky Sir, and his team helped me in
+                              understanding all core ML concepts.</p>
+                            <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">BTech(CS) | Jr.
+                              Data Analyst</p><br>
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                      <input type="tel" class="form-control" name="mobile" placeholder="Enter your mobile no." required />
+                    <div class="row" style="padding-left:4%;">
+                      <div class="row">
+                        <span class="col-md-3">
+                          <img src="../assets/imgm/testimonials/nidhi.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                        </span><br><br><br><br>
+                        <div class="row">
+                          <span class="text-center text-primary col-lg-3 col-md-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-1%;margin-left:-25%;">
+                            <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Nidhi Shah</b></p>
+                            <p class="text-info" style="font-size:11px;margin-top:-10px;">The Jupyter Notebooks made by
+                              SuvenML team is awesome. I enjoyed learning at SuvenML.</p>
+                            <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">BSci(CS) | Jr.
+                              Data Scientist </p><br>
+                          </span></div>
+                      </div>
                     </div>
-                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <input type="email" class="form-control" name="mail_id" placeholder="Enter Your Email ID - Only @gmail and @yahoo IDs allowed" required />
+                    <div class="row" style="padding-left:4%;">
+                      <div class="row">
+                        <span class="col-md-3">
+                          <img src="../assets/imgm/testimonials/shrivats.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                        </span><br><br><br><br>
+                        <div class="row">
+                          <span class="text-center text-primary col-lg-3 colmd-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-1%;margin-left:-25%;">
+                            <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Sameeksha
+                                Shrivastava</b></p>
+                            <p class="text-info" style="font-size:11px;margin-top:-10px;">Each course at Suven is awesome. I
+                              have done almost all.</p>
+                            <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">System Engineer |
+                              5+ Years Work Exp.</p><br>
+                          </span></div>
+                      </div>
                     </div>
-                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <textarea class="form-control" name="purpose" id="purpose" placeholder="how can we help ?" maxlength="100" required></textarea>
+                    <div class="row" style="padding-left:4%;">
+                      <div class="row">
+                        <span class="col-md-3">
+                          <img src="../assets/imgm/testimonials/akash.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                        </span><br><br><br><br>
+                        <div class="row">
+                          <span class="text-center text-primary col-lg-3 colmd-3 col-sm-3 col-xs-3" style="font-size:11px;padding:21px;margin-top:-1%;margin-left:-25%;">
+                            <p><b class="text-info applypads" style="font-weight: bolder;font-size:1.3rem;">Aahan Gupta</b>
+                            </p>
+                            <p class="text-info" style="font-size:11px;margin-top:-10px;">Learning from their courses enabled
+                              me fully to take part and excel in kaggle competitions. Great content , great teaching.</p>
+                            <p class="text-info" style="font-size:11px;margin-top:-10px;font-weight: bolder;font-size:1.3rem;">BE(CS) | Data
+                              Scientist</p><br>
+                          </span></div>
+                      </div>
                     </div>
                   </div>
-                  <div class="form-group">
-                    <div class="col-lg-offset-1 col-lg-4 col-md-4 col-sm-4 col-xs-6" style="padding:0px;">
-                      <img src='https://suvenconsultants.com/captcha.php' class="img-reponsive img-rounded">
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6" style="padding:0px;">
-                      <input type="text" class="form-control" name="code" id="code" placeholder="Enter Captcha" required>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 text-center">
-                      <button type="submit" class="btn btn-success" id="btn_submit">Submit</button>
-                    </div>
-                  </div>
-
-                  <div class="row"><br>
-                    <hr>
-                    <p class="text-center"><b>SCTPL Branches</b></p>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 address_modal">
-                      <p><b>Chembur</b></p>
-                      <p>4/B wing,Trishul Apartments,
-                        Sindhi Society Rd Number 1,
-                        Chembur, Mumbai.</p>
-                      <p><span class="glyphicon glyphicon-phone"></span> 022-25277413</p>
-                      <p><span class="glyphicon glyphicon-phone"></span> 9870014450</p>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 address_modal">
-                      <p><b>Boriivali</b></p>
-                      <p>c/o : Kalpana Coaching Classes,<br>
-                        Borivali (West)<br>
-                        <em>5 mins walk from Station</em></em></p>
-                      <p><span class="glyphicon glyphicon-phone"></span> 022-28674177</p>
-                      <p><span class="glyphicon glyphicon-phone"></span> 9870014450</p>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 address_modal">
-                      <p><b>Thane</b></p>
-                      <p>Kalpana Classes
-                        202, 2nd Floor, Crystal Court, B Cabin, Above Lagoo Bandhu Jwellers. Thane West.</p>
-                      <p><span class="glyphicon glyphicon-phone"></span> 9967504602</p>
-                      <p><span class="glyphicon glyphicon-phone"></span> 9870014450</p>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 address_modal">
-                      <p><b>Dadar</b></p>
-                      <p>Kalpana Classes
-                        205, 2nd Floor, Pearl Centre,
-                        Senapati Bapat Road, Dadar West,
-                        Mumbai.</p>
-                      <p><span class="glyphicon glyphicon-phone"></span> 9867674602</p>
-                      <p><span class="glyphicon glyphicon-phone"></span> 9870014450</p>
-                    </div>
-                  </div>
-
-                </form>
+                </div>
               </div>
+            </div>
+          </span>
+          <span class="col-lg-9 col-md-9" style="padding-right:0%;margin-right:-10%;">
+            <br>
+            <span style="display:inline;">
+              <span style="float:left;color:gray; margin-left: -30px;margin-right: -19px;margin-bottom: -19px;" class="smhead">
+                <img src="https://datascience.suvenconsultants.com/elearning/images/machinelearn.png" width="135" height="130" class="rounded img-fluid float-left smallicon" alt="...">
+              </span>
+              <h1 class="text-left smheadnxt" style="margin-left:-28px;margin-top:42px; font-weight:bolder;font-size: 46px;">
+                Machine Learning <span style="color:#3c763d">Beginner</span></h1>
+              <div class="indie indie1" style="font-size: 18px;margin-top: -1px;margin-right: 350px;color:#3c763d;display: block;position: absolute;left: 103px;">
+                Supervised &amp;
+                Unsupervised ML, ML
+                pipeline, Basic Data Exploration, Train-Test-Split, Encoding Categorical data, Feature Scaling, Decision
+                (CART) Trees, Random Forest, Naive Bayes
+                Classification, Principal Component Analysis, k-Means
+                Clustering and deploying ML models on FLASK.<br><br>
+                <span style="font-size:16px"><b>Pre-requisite for this course :</b> You should know <b>Python</b> for <b>Data
+                    Science</b>. </span>
+              </div>
+            </span>
+
+            <hr class="smhr" style="min-width:100%;margin-top:21%;border:solid 0.5px silver;margin-left:-30px;">
+            <div class="col-lg-12 col-md-12">
+              <span class="col-lg-9 col-md-9">
+                <div class="container-fluid" style="width: 105%;margin-left:-10%;">
+                  <span style="width:100%;margin-left:-15px;">
+                    <span style="font-family: zeitung, sans-serif;font-size: 20px;font-weight: 600;margin-bottom: 15px;-webkit-box-flex: 1;flex-grow: 1;padding-left: 28px;"><b>Lesson</b></span>
+                    <span style="float: right;margin-right: 4px;font-size: 20px;font-weight: 600;"><b>Notebook</b>&nbsp;&nbsp;&nbsp;
+                      <span style="float:right;font-size: 20px;font-weight: 600;"><b>Quiz</b></span></span>
+                  </span>
+                  <!--PHP CODE FOR RETRIVING ALL NOTEBOOK URLS BY CHECKING C_TYPE-->
+                  <?php
+            require '../dbconnect.php';
+            
+            
+            // FIRST CHECK WHETHER USER HAS MADE SUCCESSFUL PAYMENT
+            $paymentchk = "SELECT * FROM `user_course_orders` WHERE userid = $_SESSION[uid] AND courseid = $_SESSION[courseid] AND status = 'SUCCESS'";
+            $exe = mysqli_query($conn, $paymentchk);
+            $row_cnt = mysqli_num_rows($exe);
+            if($row_cnt > 0){
+                $paid = 1;
+                $_SESSION['paid'] = 1;
+            
+            if(isset($paid) && isset($_SESSION['uid'])){
+            // RETRIVING ALL NOTE BOOKS
+            $getnbks = "SELECT topicid, notebookurl FROM topics_table WHERE courseid = ".$_SESSION['courseid']." ORDER BY topicid ASC";
+            
+            $exe = mysqli_query($conn, $getnbks);
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($exe)) {
+                 @${topicid.$i} = $row["topicid"];
+                 @${notebookurl.$i} = $row["notebookurl"];
+                 $i++;
+            }
+            } 
+            }else{
+            if(isset($_SESSION['uid']) && (!isset($paid))){
+                $i = 0;
+                while($i<=13) {
+                 @${notebookurl.$i} = 'https://datascience.suvenconsultants.com/elearning/payment/buy_now.php';
+                 $i++;
+                }
+            }
+            }
+            ?>
+
+
+            <!--CHECK QUIZ ATTEMPT AND UPDATE ACCORDINGLY-->
+            
+            <?php
+            if(@isset($_SESSION[uid])){
+            $checkqattempt = "SELECT * FROM quizusers_table where uid = ".$_SESSION['uid']." and courseid = ".$_SESSION['courseid']." and performance = 1";
+            $exe = mysqli_query($conn, $checkqattempt); 
+            $passed = array();
+            $topic = array();
+            $i = 0;
+            while ($row = mysqli_fetch_assoc($exe)) {
+            $passed[$i]  = $row["performance"];
+            $topic[$i]  = $row["topicid"];
+            $i++;
+            }
+            }
+            ?>
+
+
+                <!--PHP ENDS-->
+                <ol type="" class="selen">
+                  <!-- TOPIC 1 -->
+                  <li class="lessons">
+                    <div style="width:100%;margin-top:-10px;">
+                      <span class="hidden-sm hidden-xs" style="font-size:18px;"><b>Supervised & Unsupervised ML</b></span>
+                      <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px">
+                          <?php if(isset($_SESSION['uid'])){ echo '<a href="https://colab.research.google.com/drive/1lXf-vXSldsM-FW-vh2DGl4hOIiGf0s4_" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <?php
+              if($passed[0] == 1 && $topic[0] == 1){
+              echo '<a href="#0" type="button" id="" class="">
+                  <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                  </span>
+                  </a>';
+                ?>
+                <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<form id="quiz1" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="1"/>
+                <input type="hidden" name="topicname" value="Supervised & Unsupervised ML"/>
+                <a href="#0" type="button" id="btnadd1" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz1" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="1"/>
+                <input type="hidden" name="topicname" value="Supervised & Unsupervised ML"/>
+                <a href="#0" type="button" id="btnadd1" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;""><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form>
+                ';
+                }
+                else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;outline:none;background: white; padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">You would perfectly understand
+                            the applications of Machine learning. Be able to distinguish between Supervised and Unsupervised
+                            Machine learning algorithms.</span>
+                        </span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 2 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>ML Pipeline</b></span>
+
+                       <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="https://colab.research.google.com/drive/1OuHfxds3XASI7rof_rTNeh9v7gx8UD-j" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[1] == 1  && $topic[1] == 2){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                 <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<form id="quiz2" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="2"/>
+                <input type="hidden" name="topicname" value="ML PipeLine"/>
+                <a href="#0" type="button" id="btnadd2" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz2" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="2"/>
+                <input type="hidden" name="topicname" value="ML PipeLine"/>
+                <a href="#0" type="button" id="btnadd2" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form> ';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">Any Machine Learning problem has
+                            to solved through a series of steps from "data cleaning" to "making the ML model". You would learn
+                            these steps through solving a simple Case Study completely.
+
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 3 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>Basic Data Exploration</b></span>
+                         <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl2.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[2] == 1 && $topic[2] == 3){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                  <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz3" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="3"/>
+                <input type="hidden" name="topicname" value="Basic Data Exploration"/>
+                <a href="#0" type="button" id="btnadd3" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form> ';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">You would be able perform basic
+                            "Data Exploration" thereby gaining statistics information of the data. This helps in deciding what
+                            type of ML Algo should we apply to our data.
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 4 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>Train Test Split</b></span>
+                         <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl3.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[3] == 1  && $topic[3] == 4){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                  <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz4" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="4"/>
+                <input type="hidden" name="topicname" value="Train Test Split"/>
+                <a href="#0" type="button" id="btnadd4" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form> ';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">In Machine Learning if we use the
+                            entire data for training, then how should we test our own Model ? You would understand Why and How
+                            to Split the data. Usually its 80% for Training and 20% for Testing the Model. You would learn
+                            this through solving a Linear Regression problem completely.
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 5 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>Encoding Categorical data</b></span>
+                        <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl4.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[4] == 1  && $topic[4] == 5){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                  <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz5" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="5"/>
+                <input type="hidden" name="topicname" value="Encoding Categorical data"/>
+                <a href="#0" type="button" id="btnadd5" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form>';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">All Machine Learning algorithms
+                            can only understand numeric data. You would learn different types of categorical data and ways to
+                            convert them into numeric values.
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 6 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>Feature Scaling</b></span>
+                     <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl5.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[5] == 1  && $topic[5] == 6){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                 <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz6" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="6"/>
+                <input type="hidden" name="topicname" value="Feature Scaling"/>
+                <a href="#0" type="button" id="btnadd6" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form>';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">At times numeric features are
+                            very wide spread something like youtube_Video_views. You would learn 3 different ways on scaling
+                            or normalizing them.
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 7 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>Decision (CART) Trees</b></span>
+                        <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl6.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[6] == 1  && $topic[6] == 7){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz7" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="7"/>
+                <input type="hidden" name="topicname" value="Decision (CART) Trees"/>
+                <a href="#0" type="button" id="btnadd7" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form>';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">You would learn how to apply and
+                            solve problems by using Decision Trees for Regression & Classification both.
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 8 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>Random Forest</b></span>
+                        <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl7.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[7] == 1  && $topic[7] == 8){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz8" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="8"/>
+                <input type="hidden" name="topicname" value="Random Forest"/>
+                <a href="#0" type="button" id="btnadd8" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form> ';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">A single decision tree can do a
+                            fine job but we can improve its performance by using many Decision trees. This method of using
+                            many ML algorithms is called ensemble method. You would learn Random Forest ensemble method and
+                            solve some problems.
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 9 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>Naive Bayes Classification</b></span>
+                         <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl8.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                         
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[8] == 1 && $topic[8] == 9){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                 <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                  <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz9" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="9"/>
+                <input type="hidden" name="topicname" value="Naive Bayes Classification"/>
+                <a href="#0" type="button" id="btnadd9" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form> ';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">You would learn in simplest
+                            possible ways about "Bayes" theorem and apply the Naive Bayes theorem to solve a Machine learning
+                            problem.
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 10 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>Principal Component Analysis</b></span>
+                         <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl9.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[9] == 1 && $topic[9] == 10){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                 <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                  <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz10" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="10"/>
+                <input type="hidden" name="topicname" value="Principal Component Analysis"/>
+                <a href="#0" type="button" id="btnadd10" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form>';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">You would learn about
+                            dimensionality reduction, i.e how to shortlist most important features which influence the target
+                            variable. Most of the times very few features actually influence the target variable.
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 11 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings  hidden-sm hidden-xs"><b>k-Means Clustering</b></span>
+                      <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl10.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[10] == 1 && $topic[10] == 11){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                  <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz11" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="11"/>
+                <input type="hidden" name="topicname" value="k-Means Clustering"/>
+                <a href="#0" type="button" id="btnadd11" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form> ';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">Clustering is an Unsupervised
+                            Machine Learning Algorithm. You would learn how to select important features and divide the data
+                            set into clusters. Post Clustering we can label the data and possibly use it to apply some
+                            Supervised ML model.
+                          </span></span></div>
+                    </li>
+                    <hr class="subhr">
+
+                    <!-- TOPIC 12 -->
+                    <div class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class=" hidden-sm hidden-xs"><b style="font-size:25px;font-weight:bolder;color:green;">Bonus
+                            topic :</b><b> K Nearest Neighbors (KNN) <br>Supervised Classification Algo</b></span>
+             <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:-25px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl11.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[11] == 1 && $topic[11] == 12){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                  <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz12" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="12"/>
+                <input type="hidden" name="topicname" value="K Nearest Neighbors"/>
+                <a href="#0" type="button" id="btnadd12" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form> ';
+                
+                 ?>
+                 <?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">
+                          </span></span></div>
+                    </div>
+                    <hr class="subhr">
+
+
+                    <!-- TOPIC 13 -->
+                    <li class="lessons">
+                      <div style="width:100%;margin-top:-10px;">
+                        <span class="topicheadings hidden-sm hidden-xs"><b>Deploying ML models on FLASK</b></span>
+                       <span class="topicheadings hidden-xs hidden-sm" style="float: right;margin-top:5px"><?php if(isset($_SESSION['uid'])){ echo '<a href="'.$notebookurl12.'" target="_blank"><img width=50 height=50 src="../images/icons/doc.png"></a>';}else{ echo '<a data-toggle="modal" data-target="#authenticationModal" style="cursor:pointer;margin-left:10px;"><img width=50 height=50 src="../images/icons/doc.png"></a>';}?>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <?php
+                if($passed[12] == 1 && $topic[12] == 13){
+                echo '<a href="#0" type="button" id="" class="">
+                    <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/checkdone.png">
+                    </span>
+                    </a>';
+                ?>
+                 <?php    
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] != 1){
+                echo '<a href="https://datascience.suvenconsultants.com/elearning/payment/buy_now.php" target="_blank"  class="">
+                  <span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                ';?>
+                <?php
+                }elseif(($_SESSION['uid'] != null && $_SESSION['uid'] != "") && $_SESSION['paid'] == 1 ){
+                echo '<form id="quiz13" method="post">
+                <input type="hidden" name="uid" value="'.$_SESSION['uid'].'"/> 
+                <input type="hidden" name="name" value="'.$_SESSION['name'].'"/>
+                <input type="hidden" name="email" value="'.$_SESSION['email'].'"/>
+                <input type="hidden" name="courseid" value="'.$_SESSION['courseid'].'"/>
+                <input type="hidden" name="topicid" value="13"/>
+                <input type="hidden" name="topicname" value="Deploying ML models on FLASK"/>
+                <a href="#0" type="button" id="btnadd13" class="">
+                  <span style="float:right;position:relative;margin-top: -50px;margin-left: 95px;"><img width=47 height=47 src="../images/icons/quiz.png">
+                  </span>
+                </a>
+                </form> ';?>
+<?php
+                }else{
+                    echo '
+                    <button class="" data-toggle="modal" data-target="#authenticationModal" style="border:none;background: white;outline:none;padding:none;"><span style="float:right;position:relative;margin-bottom:-21px;"><img width=47 height=47 src="../images/icons/quiz.png"></span></button>    
+                    ';
+                }
+                 ?>
+
+                        </span>
+                      </div>
+
+                      <div><span style="margin-bottom: -23px;font-size:11px;margin-top:2px;margin-right:30%;color:#3c763d;font-weight:500;display: block;"><span class="indie indie2 hidden-xs hidden-sm" style="font-size:17px;">You would learn how to put your
+                            ML model to good use. You would host your pickle file (i.e the ML model) over FLASK (web
+                            application framework). In this way your friends , teachers and your Boss (at work) would be able
+                            to use your ML model for predicting, classifying or recommending.
+                          </span></span></div>
+                    </li>
+                  </ol>
+
+
+                </div>
+              </span>
+
+              <span class="col-lg-3 col-md-3">
+                <div class="container-fluid"><br><br>
+                  <span style="width:100%;" class="text-center hidden-xs hidden-sm">
+                    <span class="topicheadings"><b style="margin-left:37%;font-weight:bolder; font-size:25px;color:green;">Your</b></span><br>
+                    <span class="topicheadings"><b style="margin-left:24%;font-weight:bolder; font-size:25px;color:green;">Progress</b></span>
+                    <br>
+                  </span>
+
+
+
+                  <!--Progress Bar Starts Here-->
+                  <div class="svgresized hidden-xs hidden-sm" style="margin-left:0px;margin-left:0px;text-align: center;">
+                    <div class="box">
+        <div id="cont" data-pct="0">
+        <svg id="svg" width="200" height="200" viewPort="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+          <circle id="bar" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+        </svg>
+        </div>
+        </div>
+        <?php
+        $sql = "SELECT COUNT(DISTINCT topicid) as progress FROM quizusers_table where uid = $_SESSION[uid] and courseid = $_SESSION[courseid] and performance = 1 ORDER BY topicid ASC";
+        $exe = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_array($exe)) {
+            $actual = $row["progress"];
+            $percent = ($row["progress"]/13)*100;
+            echo '<script type="text/javascript">
+                    var percent = '.$percent.';
+                  </script>';
+        }
+        ?>
+        <script type="text/javascript">
+        
+        $(document).ready(function() {
+            setTimeout(function(){ update(percent); }, 1000);
+        });
+        
+        function update(pct){
+              var val = Math.round(pct);
+              var $circle = $("#svg #bar");
+            
+              if (isNaN(val)) {
+                val = 0;
+              } else {
+                var r = $circle.attr("r");
+                var c = Math.PI * (r * 2);
+            
+                if (val < 0) {
+                  val = 0;
+                }
+                if (val > 100) {
+                  val = 100;
+                }
+            
+                var pct = ((100 - val) / 100) * c;
+            
+                $circle.css({ strokeDashoffset: pct });
+            
+                $("#cont").attr("data-pct", val);
+            
+        }
+            
+        }
+        
+        </script>
+                  <div><br><br>
+
+
+                    <!-- Begin Fixed RIght Share -->
+                    <div class="col-md-3 col-xs-12 meright hidden-xs hidden-sm" style="float:right;position:absolute;">
+
+                      <h3 class="text-success text-center shiftme"><span style="font-weight:bolder; font-size:25px;margin-left:-47px;">Instructors</span></h3>
+                      <div class="">
+                        <div class="row">
+
+                          <div class="">
+                            <div class="row" style="margin-right: -85px;margin-left: -27px;margin-top:10px;">
+                              <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 22%;">
+                                <img src="https://datascience.suvenconsultants.com/images/testimonials/1per.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                              </span>
+                              <div class="row">
+                                <span class="text-justify text-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size: 13px; margin-left:24px;">
+
+                                  <b class="text-info applypads" style="font-weight: bolder;font-size:1.2rem;">Rocky
+                                    Jagtiani</b> Technology trainer to companies like Accenture , Morgan Stanley, EY. Have
+                                  trained more than 18000 candidates in 0-3 years work-ex category.<br><br><br><br>
+
+                                </span></div>
+                            </div>
+                          </div>
+
+                          <div class="">
+                            <div class="row" style="margin-right: -85px;margin-left: -27px;">
+                              <span class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 22%;">
+                                <img src="https://datascience.suvenconsultants.com/images/testimonials/2per.jpg" class="img-circle fiximg" alt="" width=80 height=80>
+                              </span>
+                              <div class="row">
+                                <span class="text-justify text-primary col-lg-12 col-md-12 col-sm-12 col-xs-12" style="font-size:13px; margin-left:24px;">
+
+                                  <b class="text-info applypads" style="font-weight: bolder;font-size:1.2rem;">Niraj
+                                    Sharma</b> Presently Data Analyst at NeoSoft (CMM level 5). An expert in R programming. An
+                                  active contributor at Kaggle Data Analytics using R competitions.<br><br><br><br>
+
+                                </span></div>
+                            </div>
+                          </div><br>
+
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Fixed Right Share -->
+
+
+
+                  </div>
+                </div>
+              </span>
+            </div>
+          </span>
+          <!--<span class="col-lg-2 col-md-2" >B-->
+          <!--</span>-->
+        </span>
+
+
+
+        <div class="hidden-lg hidden-md container-fluid">
+          <div class="row formainheading">
+            <div class="row">
+              <div class="col-sm-3">
+                <span style="float:left;" class="img-responsive img-fluid">
+                  <img src="https://datascience.suvenconsultants.com/elearning/images/machinelearn.png" width="135" height="130" class="rounded img-fluid float-left" alt="...">
+                </span>
+              </div>
+              <div class="col-sm-9">
+                <h1 class="" style="font-weight:bolder;font-size: 26px;margin-top:36px;">Machine Learning <span style="color:#3c763d">Beginner</span></h1>
+
+              </div>
+            </div>
+
+            <div class="row" style="margin: 0% 2% 0% 2%;">
+              <span class="col-sm-12 col-xs-12">
+
+                <span style="font-size: 14px;color:#3c763d;">
+                  Supervised & Unsupervised ML, ML pipeline, Basic Data Exploration, Train-Test-Split, Encoding Categorical
+                  data, Feature Scaling, Decision (CART) Trees, Random Forest, Naive Bayes Classification, Principal Component
+                  Analysis, k-Means Clustering and deploying ML models on FLASK.
+
+                  <br>
+                  <br>
+                  <span style="font-size:16px"><b>Pre-requisite for this course :</b> You should know <b>Python</b> for
+                    <b>Data Science</b>. </span>
+                </span>
+
+              </span>
+            </div>
+            <br><br>
+
+          </div>
+          <div class="row fortabularcontent">
+            <table class="table">
+              <thead>
+                <tr style="font-size:18px;">
+                  <th><b>Lesson</b></th>
+                  <th><b>Notebook</b></th>
+                  <th><b>Quiz</b></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>1.</b>&nbsp;&nbsp;Supervised & Unsupervised ML</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <tr>
+                  <td><b>2.</b>&nbsp;&nbsp;ML Pipeline</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <tr>
+                  <td><b>3.</b>&nbsp;&nbsp;Basic Data Exploration</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <!--**********************-->
+
+                <tr>
+                  <td><b>4.</b>&nbsp;&nbsp;Train Test Split</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <tr>
+                  <td><b>5.</b>&nbsp;&nbsp;Encoding Categorical data</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <tr>
+                  <td><b>6.</b>&nbsp;&nbsp;Feature Scaling</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <!--**********************-->
+
+                <tr>
+                  <td><b>7.</b>&nbsp;&nbsp;Decision (CART) Trees</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <tr>
+                  <td><b>8.</b>&nbsp;&nbsp;Random Forest</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <tr>
+                  <td><b>9.</b>&nbsp;&nbsp;Naive Bayes Classification</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <!--**********************-->
+
+                <tr>
+                  <td><b>10.</b>&nbsp;&nbsp;Principal Component Analysis</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+
+
+
+
+
+                <tr>
+                  <td><b>11.</b>&nbsp;&nbsp;k-Means Clustering</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+                <tr>
+                  <td><b style="color:green;">Bonus topic</b> : K Nearest Neighbors (KNN)
+                    Classification Algo</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal" style="display:none;">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+
+
+                <tr>
+                  <td><b>12.</b>&nbsp;&nbsp;Deploying ML models on FLASK</td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=50 height=50 src="../images/icons/doc.png">
+                      </a></span></td>
+                  <td><span class="" data-toggle="modal" data-target="#exampleModal">
+                      <a href="#0" target="">
+                        <img width=47 height=47 src="../images/icons/quiz.png">
+                      </a></span></td>
+                </tr>
+
+              </tbody>
+
+            </table>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <center>
+                      <p>For Google Colab Notebooks
+                        larger screen size is required.<br>
+                        Please switch to desktop mode.</p>
+                    </center>
+                  </div>
+                  <!--<div class="modal-footer align-items-center justify-content-center">-->
+                  <!--  <center><button type="button" onclick="location.reload();" class="btn btn-danger" data-dismiss="modal">Close</button></center>-->
+                  <!--</div>-->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- QUIZ MODAL -->
+
+        <div style="top:-2%;" class="modal fade" id="quizModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header1>
+    
+              </div>
+              <div class="modal-body" id="QuizTrigger">
+
+              </div>
+              
+              <!--<div class="modal-footer" style="text-align: center;">-->
+              <!--  <button type="button" onclick="location.reload();" class="btn btn-danger" data-dismiss="modal">Close</button>-->
+              <!--</div>-->
+              
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Popup Modal For Hiring Recruitment -->
-    <div id="hiringModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+        <div style="top:12%;" class="modal fade" id="quizresult" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header1>
+        
+              </div>
+              <div class="modal-body" id="quizresbody">
+                <div class="container" style="padding-left:41%;padding-top:3%;margin-bottom:-7%;">
+                <b style="font-weight:bolder;font-size:18px;color:green;">Right Answers : <span id="urlra"></span></b><br>
+                <b style="font-weight:bolder;font-size:18px;color:green;">Wrong Answers : <span id="urlwa"></span></b><br>
+                <b style="font-weight:bolder;font-size:18px;color:green;">Not Attempted : <span id="urlua"></span></b><br>
+                </div>
+                <div class="container" style="margin-left:-16%;">
+                    <div class="loader">Loading...</div>
+                </div>
+
+                <script type="text/javascript">
+                  var urlobj = new URL(window.location);
+                  var url = urlobj.href;
+                  let params = new URLSearchParams(url);
+                  ra = params.get('ra');
+                  wa = params.get('wa');
+                  ua = params.get('ua');
+                  document.querySelector("#urlra").innerHTML = ra;
+                  document.querySelector("#urlwa").innerHTML = wa;
+                  document.querySelector("#urlua").innerHTML = ua;
+                  if (ra == 0 || wa == 0 || ua == 0) {
+                    var ctype = '<?php echo $_SESSION[ctype]; ?>';
+                    setTimeout(function() {
+                      window.location.assign("./index.php?ctype=" + ctype + "");
+                    }, 3000);
+                  }
+
+                </script>
+
+              </div>
+              <!--<div class="modal-footer" style="text-align: center;">-->
+              <!--  <button type="button" onclick="location.reload();" class="btn btn-danger" data-dismiss="modal">Close</button>-->
+              <!--</div>-->
+            </div>
+          </div>
+        </div>
+
+
+        <!-- AJAX FOR INDIVIDUAL QUIZ -->
+        <script>
+          $(document).ready(function() {
+            if (window.location.href.indexOf('#quizresult') != -1) {
+              $('#quizresult').modal('show');
+            }
+          });
+
+          // Ajax Call For TOPICID 1
+          $(document).on('click', '#btnadd1', function() {
+            var formdata = $("#quiz1").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 2
+          $(document).on('click', '#btnadd2', function() {
+            var formdata = $("#quiz2").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 3
+          $(document).on('click', '#btnadd3', function() {
+            var formdata = $("#quiz3").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 4
+          $(document).on('click', '#btnadd4', function() {
+            var formdata = $("#quiz4").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 5
+          $(document).on('click', '#btnadd5', function() {
+            var formdata = $("#quiz5").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 6
+          $(document).on('click', '#btnadd6', function() {
+            var formdata = $("#quiz6").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 7
+          $(document).on('click', '#btnadd7', function() {
+            var formdata = $("#quiz7").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 8
+          $(document).on('click', '#btnadd8', function() {
+            var formdata = $("#quiz8").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 9
+          $(document).on('click', '#btnadd9', function() {
+            var formdata = $("#quiz9").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 10
+          $(document).on('click', '#btnadd10', function() {
+            var formdata = $("#quiz10").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 11
+          $(document).on('click', '#btnadd11', function() {
+            var formdata = $("#quiz11").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 12
+          $(document).on('click', '#btnadd12', function() {
+            var formdata = $("#quiz12").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+          // Ajax Call For TOPICID 13
+          $(document).on('click', '#btnadd13', function() {
+            var formdata = $("#quiz13").serialize();
+            // var data = $("#projectForm").serialize();
+            console.log(formdata);
+            $.ajax({
+              url: '../quizengine/questions.php',
+              method: 'post',
+              data: formdata,
+              success: function(data) {
+                $("#quizModal").modal('show');
+                $("#QuizTrigger").html(data);
+              }
+            });
+          });
+
+        </script>
+
+
+
+
+        <!--MAIN BODY CONTENT ENDS-->
+        <!-- Login & Registration Modal -->
+        <?php
+   if(!isset($_SESSION['uid'])){
+
+    echo '<div class="modal fade" id="subscribeModal" tabindex="-1" role="dialog" aria-labelledby="Subscribe us">
+    <div class="modal-dialog modal-smll" role="modal">
         <div class="modal-content">
-          <div class="modal-header text-center">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4><b>Suven Consultants & Technology Pvt. Ltd.</b></h4>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <img src="https://suvenconsultants.com/mainpagefiles/images/sim1.jpg" class="img-circle img-responsive" />
-              </div>
-              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-                <p>
-                  Ms Simran (Head for Operations & Recruitment) is an thorough HR professional coming with an expertise in hiring people laterally across levels from Junior to Senior. With 15 years of experience hiring talent right from fresher to CEO level, has a flair for writing and nurturing talent from very basic.She along with her team strongly believes in fitting the right peg to the right hole. Her team likes working with level headed and out of the box thinkers. Do fill in the form below to enable us to connect.
-                </p>
-              </div>
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="badge" style="background-color:#000">x</span>
+              </button>
+              <h4 class="modal-title" id="myModalLabel" style=""><b>Allow my team to send you some great resources.</b></h4>
             </div>
-            <div class="row">
-              <h5 class="text-center"><b>Let us connect with you</b></h5>
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <form name="hiringForm" action="https://suvenconsultants.com/hiring_connect.php" method="post" onsubmit="return validateHiring()">
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="company_name" placeholder="Enter Your Company Name" required />
+            <div class="modal-body">
+              <form class="form-group" action="" id="subscribeForm">
+                <br>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input type="hidden" name="action_mail" value="subscribeme"/>
+                    <input type="text" class="form-control input-lg" name="subscribe_name" id="subscribe_name" placeholder="Enter Your Full Name"><br>
+                    <input type="email" class="form-control input-lg" name="subscribe_email" id="subscribe_email" placeholder="Enter Your Email Id">
+                    <p class="text-center">Allow my Data Science team to call and understand your study requirements.</p>
+                    <input type="number" name="subscribe_contact" id="subscribe_contact" class="form-control input-lg" placeholder="Enter Your Contact Number">
                   </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="hr_name" placeholder="Enter Your HR Name" required />
+                </div>
+                <div class="row">
+                <button type="button" id="subscribeme" class="btn btn-success btn-lg center-block block-center" style="padding-top:15px;border-radius:0px;">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <!--Action Resultant Modal -->
+  <div class="modal fade" id="actionsModal" tabindex="-1" role="dialog" aria-lebelledby="Subscribe us">
+  <div class="modal-content">
+        <div class="modal-header text-center">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="badge" style="background-color:#000;">×</span></span></button>
+              <h4 class="modal-title" id="myModalLabel" style="color:#28a745;"><b>Would get in touch with you very soon</b></h4>
+        </div>
+        <div class="modal-body text-center" id="displayinModal">
+        </div>
+  </div>
+  </div>';
+   }
+  ?>
+        <div class="modal" id="authenticationModal">
+          <div class="modal-dialog modal-md">
+            <div class="modal-content">
+              <div class="modal-header" style="padding: 0px;">
+                <ul class="nav nav-pills nav-justified">
+                  <li class="active"><a href="#login" data-toggle="pill">Login</a></li>
+                  <li><a href="#registration" data-toggle="pill">Register</a></li>
+                </ul>
+              </div>
+              <div class="modal-body">
+
+                <!--<h3 class="text-center"><img src="images/sctpl_logo.png" height="32px" width="32px" /> Suven Consultants & Technology Pvt. Ltd.</h3><br>-->
+                <div class="tab-content" style="border:none;">
+                  <div id="login" class="tab-pane fade in active">
+                    <!--<form name="loginForm" action="authentication.php" method="post" onsubmit="">-->
+                    <form name="loginForm" action="./authentication.php" method="post" onsubmit="return validateLogin()">
+                      <input type="hidden" name="action" value="login" />
+                      <div class="form-group">
+                        <label>Email ID:</label>
+                        <input type="email" class="form-control" name="email" placeholder="Email ID" required="required">
+                      </div>
+                      <div class="form-group">
+                        <label>Password:</label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required="required" minlength="6">
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-success center-block">Login <span class="glyphicon glyphicon-log-in"></span></button>
+                      </div>
+                      <p class="text-center">
+                        <a href="#registration" data-toggle="pill">New to our online courses? Register </a>
+                      </p>
+                    </form>
                   </div>
-                  <div class="form-group">
-                    <input type="tel" class="form-control" name="contact" placeholder="Enter Your Contact Number" required />
+                  <div id="registration" class="tab-pane fade">
+                    <!--<form name="registerForm" action="authentication.php" method="post" onsubmit="">-->
+                    <form name="registerForm" action="./authentication.php" method="post" onsubmit="return validateRegister()">
+                      <input type="hidden" name="action" value="register" />
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                          <label>Full Name:</label>
+                          <input type="text" class="form-control" name="name" placeholder="Enter your full name" required="required">
+                          <p>This name would be used for certification purpose.</p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                          <label>Email ID:</label>
+                          <input type="email" class="form-control" name="emailid" placeholder="Enter your Email ID" required="required">
+                          <p>This would be your default login username</p>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                          <label>Password:</label>
+                          <input type="password" class="form-control" name="password" id="password" placeholder="Password (minimum 8 characters)" required="required" minlength="8">
+                          <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                          <label>Confirm Password:</label>
+                          <input type="password" class="form-control" name="confirm_password" placeholder="Confirm password" required="required">
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                          <label>Contact No.:</label>
+                          <input type="tel" class="form-control" name="contact" placeholder="Enter your contact no." required="required">
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
+                          <p>Our team would connect with you to understand your study requirements very soon.</p>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-success center-block">Register <i class="fa fa-user-plus"></i></button>
+                      </div>
+                    </form>
                   </div>
-                  <div class="form-group">
-                    <input type="email" class="form-control" name="mail_id" placeholder="Enter Your Email ID" required />
-                  </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="requirement" placeholder="Your Job Requirement" maxlength="100" required />
-                  </div>
-                  <div class="form-group">
-                    <div class="col-lg-offset-2 col-lg-4 col-md-offset-2 col-md-4 col-sm-6 col-xs-6" style="padding:0px;">
-                      <img src='https://suvenconsultants.com/captcha.php' class="img-rounded img-reponsive">
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" style="padding:0px;">
-                      <input type="text" class="form-control" name="code" id="code" placeholder="Enter Captcha" required>
-                    </div>
-                  </div>
-                  <div class="form-group text-center"><br><br>
-                    <button type="submit" class="btn btn-success btn-block" id="btn_submit">Submit</button>
-                  </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- SCRIPTS  Start-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    <!-- SCRIPTS END -->
-
-    <script>
-      function validateContact() {
-        var name = document.forms["contactForm"]["name"].value;
-        var mobile = document.forms["contactForm"]["mobile"].value;
-        var email = document.forms["contactForm"]["mail_id"].value;
-        var purpose = document.forms["contactForm"]["purpose"].value;
-        var captcha = document.forms["contactForm"]["code"].value;
-
-        var phoneno = /^\d{10}$/;
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-        if (name == "" || name == null) {
-          alert("Please Enter Your Name");
-          return false;
-        } else if (mobile == "" || mobile == null) {
-          alert("Please Enter Your Mobile Number");
-          return false;
-        } else if (phoneno.test(mobile) == false) {
-          alert("Please Enter Valid Mobile Number");
-          return false;
-        } else if (email == "" || email == null) {
-          alert("Please Enter Your Email ID");
-          return false;
-        } else if (reg.test(email) == false) {
-          alert("Invalid Email Address");
-          return false;
-        } else if (purpose == "" || purpose == null) {
-          alert("Please Enter Your Purpose");
-          return false;
-        } else if (purpose.length > 100) {
-          alert("You can not enter more than 100 characters");
-          return false;
-        } else if (captcha == "" || captcha == null) {
-          alert("Please Enter Captcha Code");
-          return false;
-        }
-
-      }
-
-      function validateHiring() {
-        var companyname = document.forms["hiringForm"]["company_name"].value;
-        var hrname = document.forms["hiringForm"]["hr_name"].value;
-        var contact = document.forms["hiringForm"]["contact"].value;
-        var email = document.forms["hiringForm"]["mail_id"].value;
-        var requirement = document.forms["hiringForm"]["requirement"].value;
-        var captcha = document.forms["hiringForm"]["code"].value;
-
-        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-
-        if (companyname == "" || companyname == null) {
-          alert("Please Enter Your Company Name");
-          return false;
-        } else if (hrname == "" || hrname == null) {
-          alert("Please Enter HR Name");
-          return false;
-        } else if (contact == "" || contact == null) {
-          alert("Please Enter Contact Number");
-          return false;
-        } else if (email == "" || email == null) {
-          alert("Please Enter Your Email ID");
-          return false;
-        } else if (reg.test(email) == false) {
-          alert("Invalid Email Address");
-          return false;
-        } else if (requirement == "" || requirement == null) {
-          alert("Please Enter Your Requirement");
-          return false;
-        } else if (requirement.length > 100) {
-          alert("You can not enter more than 100 characters");
-          return false;
-        } else if (captcha == "" || captcha == null) {
-          alert("Please Enter Captcha Code");
-          return false;
-        }
-
-      }
-
-    </script>
-
-
-    <!--End of Tawk.to Script-->
-
-    <!--<div class="training hidden-xs hidden-sm">-->
-    <!--  <p>Register for free : training - <a href="https://goo.gl/forms/D1MXNNbAnxdLers72" target="_blank"><b>here</b></a></p>-->
-    <!--  <p><a href="https://drive.google.com/file/d/0B4rCFkKCsCeKc0pDZDdQY3dmVG8/view" target="_blank"><b>Download Information Brochure</b></a></p>-->
-    <!--</div>-->
-    <!--<div class="codeint hidden-xs hidden-sm" style="margin-left:-5px;margin-bottom:-27px;">-->
-    <!--  <p>-->
-    <!--    <p>-->
-    <!--      <Strong>Coding<br><br>Internships</strong>-->
-    <!--    </p>-->
-    <!--    <p><a href="https://internship.suvenconsultants.com/" target="_blank"><b>Apply Here</b></a></p>-->
-
-
-    <!--</div>-->
-    <!--<div class="freshers hidden-sm hidden-xs" style="margin-left:-5px; line-height:10px;">-->
-    <!--  <p><Strong>Freshers</strong></p>-->
-    <!--  <p><a href="https://freshers.suvenconsultants.com/" target="_blank" style="font-size:11px;"><b>Apply Here</b></a></p>-->
-    <!--</div>-->
-
-  </body>
-  <script>
-    function python_rar() {
-      var pwd = prompt("Please enter a Password", "");
-      if (pwd == "rocky0809Py") {
-
-        window.open("downloads/suvenPythonWorkspace.rar", "_blank");
-      } else {
-        alert("Password you enter was incorrect");
-      }
-
-    }
-
-    function python_rar2() {
-      var pwd = prompt("Please enter a Password", "");
-      if (pwd == "rocky0809ML") {
-
-        window.open("https://drive.google.com/open?id=13AOSD8amnk8iNwJmeP0pwIgKSBF12g70", "_blank");
-      } else {
-        alert("Password you enter was incorrect");
-      }
-
-    }
-
-
-    function aml(link_number) {
-
-
-      var pwd = prompt("Please enter a Password", "");
-
-      if (pwd == "Lokesh2020AmL") {
-        if (link_number == 2) {
-          window.open("downloads/part 3_Exploring and Proccessing text data.rar", "_blank");
-        } else if (link_number == 3) {
-          window.open("downloads/part 4_Converting Text to Features.rar", "_blank");
-        } else if (link_number == 4) {
-          window.open("downloads/part 5_Advanced NLP.rar", "_blank");
-        } else if (link_number == 5) {
-          window.open("downloads/part 6_Four Real_World Case Studies n Solutions.rar", "_blank");
-        } else if (link_number == 6) {
-          window.open("downloads/part 7_Deep Learning in NLP.rar", "_blank");
-        } else if (link_number == 7) {
-          window.open("https://drive.google.com/open?id=0B0sr7hUZERtfbjRzU2NyVV90X0U", "_blank");
-        } else if (link_number == 8) {
-          window.open("https://drive.google.com/open?id=0B0sr7hUZERtfaGRsXzU5UThPc0U", "_blank");
-        } else if (link_number == 9) {
-          window.open("https://drive.google.com/open?id=1EdHBcWmpDyxvDm25jiXnTLAG_EiD8ps3", "_blank");
-        } else if (link_number == 10) {
-          window.open("https://drive.google.com/open?id=1B1BHQCs594ZPPZwlP3SNPboOU6F4OkTN", "_blank");
-        } else if (link_number == 11) {
-          window.open("https://db.suvenconsultants.com/machineLearningCompletePdf.pdf", "_blank");
-        } else if (link_number == 12) {
-          window.open("https://drive.google.com/open?id=1gi_95WvtTklyDHvLfy-fiWeicYIJXB2a", "_blank");
-        }
-      } else {
-        alert("Password you enter was incorrect");
-      }
-
-
-
-
-
-    }
-
-
-
-    function hadoop_pdf(link_number) {
-      var pwd = prompt("Please enter a Password", "");
-
-      if (pwd == "niraj0605Da") {
-        if (link_number == 1) {
-          window.open("https://drive.google.com/file/d/1N3JuJ-wCTu8qyrXiQbwg-em4CynFVP59/view", "_blank");
-        } else if (link_number == 2) {
-          window.open("https://drive.google.com/open?id=1r4Z0vu64BMBOqfjjYW_VSyUp7pREztIY", "_blank");
-        } else if (link_number == 3) {
-          window.open("https://drive.google.com/open?id=1pN_cypBV9qooB0dAgqyyi1wlQQjM6CuU", "_blank");
-        } else if (link_number == 4) {
-          window.open("downloads/HDFS_MapReduce Notes.rar", "_blank");
-        } else if (link_number == 5) {
-          window.open(" https://drive.google.com/open?id=0B4rCFkKCsCeKeEVhcjFrVnYybE0", "_blank");
-        } else if (link_number == 6) {
-          window.open("https://drive.google.com/open?id=0B4rCFkKCsCeKc01ENGNldm5heHM", "_blank");
-        } else if (link_number == 7) {
-          window.open("https://drive.google.com/open?id=0B0sr7hUZERtfbjRzU2NyVV90X0U", "_blank");
-        } else if (link_number == 8) {
-          window.open("https://drive.google.com/open?id=0B0sr7hUZERtfaGRsXzU5UThPc0U", "_blank");
-        } else if (link_number == 9) {
-          window.open("https://drive.google.com/open?id=1EdHBcWmpDyxvDm25jiXnTLAG_EiD8ps3", "_blank");
-        } else if (link_number == 10) {
-          window.open("https://drive.google.com/open?id=1B1BHQCs594ZPPZwlP3SNPboOU6F4OkTN", "_blank");
-        } else if (link_number == 11) {
-          window.open("https://db.suvenconsultants.com/machineLearningCompletePdf.pdf", "_blank");
-        } else if (link_number == 12) {
-          window.open("https://drive.google.com/open?id=1gi_95WvtTklyDHvLfy-fiWeicYIJXB2a", "_blank");
-        }
-      } else {
-        alert("Password you enter was incorrect");
-      }
-    }
-
-    $('.navbar-collapse a').click(function() {
-      $(".navbar-collapse").collapse('hide');
-    });
-
-  </script>
-  <script src="js/main1.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.0/jquery.cookie.min.js"></script>
-
-</html>
+        </div>
+        </span></span>
+        <!-- Login & Registration Modal Ends -->
+        <?php include 'footer.php';?>
+      </body>
+    </html>

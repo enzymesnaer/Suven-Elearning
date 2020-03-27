@@ -3,7 +3,6 @@
 if(isset($_SESSION["uid"])){
   $uid = $_SESSION["uid"];
   $name = $_SESSION["name"];
-  $courseid = $_GET['cid'];
 }else{
   $uid = '';
   $name = '';
@@ -26,21 +25,21 @@ if(isset($_SESSION["uid"])){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" type="text/css" href="dist/fullpage.css" /> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/internship.css">
-    <link rel="stylesheet" href="../css/font-awesome.css">
-    <link rel="stylesheet" href="../css/trainers.css">
-    <link rel="stylesheet" href="../css/timeline.css">
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/internship.css">
+    <link rel="stylesheet" href="../../css/font-awesome.css">
+    <link rel="stylesheet" href="../../css/trainers.css">
+    <link rel="stylesheet" href="../../css/timeline.css">
 
    
     <!-- Modernizr -->
@@ -80,6 +79,19 @@ if(isset($_SESSION["uid"])){
     </script>
 
     <style>
+      .modal {
+     overflow-y: auto !important;
+     overflow-x: auto !important;
+    }
+    
+    .modal-open {
+     overflow: auto !important;
+    }
+    
+    .modal-open[style] {
+    padding-right: 0px !important;
+    margin-right: 0px !important;
+    }
       html,
       body {
         max-width: 100%;
@@ -383,7 +395,10 @@ if(isset($_SESSION["uid"])){
         border-radius: 0px;
         -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 5px rgba(0, 0, 0, .075);
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 5px rgba(0, 0, 0, .075);
+        overflow-y: auto !important;
+         overflow-x: auto !important;
       }
+    
 
       .navbar-default {
         background-color: #f8f8f8;
@@ -640,7 +655,7 @@ if(isset($_SESSION["uid"])){
     <script type="text/javascript">
     
     function doLogout(){
-    window.location.href = "./logout.php";
+    window.location.href = "../logout.php";
     }
     </script>
     
@@ -648,7 +663,7 @@ if(isset($_SESSION["uid"])){
 
   <body style="">
 
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top" style="padding-bottom:0.5%;">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="https://suvenconsultants.com/" style=""><img src="https://suvenconsultants.com/mainpagefiles/images/sctpl_logo.png" style="display:inline; margin-left:30px;">
@@ -665,11 +680,11 @@ if(isset($_SESSION["uid"])){
                     if(isset($_SESSION['uid'])){
                     
                     
-                    echo '<li><button style="padding-left:10px;padding-right:10px;margin-right:38px;margin-top:17px;" class="btn btn-danger" onclick="doLogout()"><b>Logout</b></button></li>';
+                    echo '<li><button style="padding-left:10px;padding-right:10px;margin-right:38px;margin-top:10px;" class="btn btn-danger" onclick="doLogout()"><b>Logout</b></button></li>';
                        
                     }else{
                         
-                        echo '<li><button class="btn btn-success" data-toggle="modal" data-target="#authenticationModal" style="padding-left:10px;padding-right:10px;margin-right:38px;margin-top:17px;"><b>Log In</b></button></li>'; 
+                        echo '<li><button class="btn btn-success" data-toggle="modal" data-target="#authenticationModal" style="padding-left:10px;padding-right:10px;margin-right:38px;margin-top:13px;"><b>Log In</b></button></li>'; 
                         
                     }
                 ?></li>

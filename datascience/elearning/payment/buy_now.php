@@ -1,10 +1,26 @@
-
-<?php 
+   <?php 
 session_start();
-require_once('dbconnect.php');
+require_once('../dbconnect.php');
 
-$indcourseid="";
-$pkgcourseid="";
+$indcourseid= $_SESSION['courseid'];
+$pkgcourseid= $_SESSION['pkgcourseid'];
+
+if($_SESSION['courseid'] == 1001){
+$_SESSION['ccode'] = 'MLB';
+}elseif($_SESSION['courseid'] == 1002){
+$_SESSION['ccode'] = 'MLI';
+}elseif($_SESSION['courseid'] == 2001){
+$_SESSION['ccode'] = 'MLB';
+}elseif($_SESSION['courseid'] == 2002){
+$_SESSION['ccode'] = 'MLI';
+}else{
+$_SESSION['ccode'] = '';
+}
+
+
+// echo '<pre>';
+//     print_r($_SESSION);
+// echo '</pre>'; 
 
 if(isset($_POST['coupon'])){
 
@@ -37,7 +53,7 @@ if(isset($_SESSION['ccode']) && isset($_SESSION['ctype'])){
 	 course_table c 
 	where c.courseid not in 
 	(select courseid from package_courses)
-	and c.code='MLI'";
+	and c.code='$coursecode'";
 	
 	$resultset = mysqli_query($conn, $query);
 	$row1 = mysqli_fetch_array($resultset);
@@ -56,7 +72,7 @@ if(isset($_SESSION['ccode']) && isset($_SESSION['ctype'])){
 	join all_packages a
 	where c.courseid=p.courseid
 	and a.id=p.id
-	and c.code='MLI'";
+	and c.code='$coursecode'";
 	
 	$resultset = mysqli_query($conn, $query);
 	$row2 = mysqli_fetch_array($resultset);
@@ -78,7 +94,8 @@ if(isset($_SESSION['ccode']) && isset($_SESSION['ctype'])){
 body {
   font-family: Arial;
   font-size: 17px;
-  padding: 8px;
+  padding:0px 8px 8px 8px;
+  margin-top: -10px;
 }
 
 * {
@@ -226,11 +243,12 @@ span.price {
 </head>
 <body>
 
-<h2 align="center">Course Checkout</h2>
+<h2 align="center">Get 3 months of unlimited total access to the entire course of</h2>
+<h2 align="center">Suven Data Science Official Courses On-Demand.</h2>
 <div class="row col-50">
   <div class="col-25">
     <div class="container">
-      <form action="./payment/payment.php" method="POST">
+      <form action="./payment.php" method="POST">
       
         <div class="row">
           <div class="col-50">

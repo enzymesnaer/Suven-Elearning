@@ -31,10 +31,10 @@ $isValidChecksum = verifychecksum_e($paramList, PAYTM_MERCHANT_KEY, $paytmChecks
 
 
 if($isValidChecksum == "TRUE") {
+    
 	echo "<b>Checksum matched and following are the transaction details:</b>" . "<br/>";
 	if ($_POST["STATUS"] == "TXN_SUCCESS") {
 		echo "<b>Transaction status is success</b>" . "<br/>";
-		
 		echo "creating transaction entries in the database";
 		require '../dbconnect.php';
 		
@@ -71,12 +71,15 @@ if($isValidChecksum == "TRUE") {
 			$update_orders="update user_course_orders set status='SUCCESS' Where orderid='$orderid'";
 			if(mysqli_query($conn,$update_orders)){
 				echo "order record updated ";
+				// header('Location: ../'.strtolower($_SESSION['ccode']).'?ctype='.$_SESSION['ctype'].'');
+				
 			}else{
 			echo mysqli_error($conn);
 		}
 
 		}
 		echo "----------------------------------------------";
+		
 
 	}
 	else {

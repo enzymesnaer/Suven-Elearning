@@ -1,6 +1,5 @@
 <?php
 include('dbconnect.php');
-
 if($_POST["action_mail"] == "subscribeme"){
     
     $emailtosave = $_POST["subscribe_email"];
@@ -46,5 +45,4 @@ if($_POST["action_mail"] == "subscribeme"){
 }else{
     echo $_POST["action_mail"];
 }
-
 ?> 

@@ -12,8 +12,6 @@ if($differenceinseconds > 0 && $differenceinseconds < 600)
 	echo gmdate("H:i:s", $differenceinseconds);
 	
 }else{
-	
-	//echo $differenceinseconds;
 	echo "Time Over";
 }
 	

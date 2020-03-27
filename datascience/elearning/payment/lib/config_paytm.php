@@ -11,7 +11,7 @@ define('PAYTM_ENVIRONMENT', 'TEST'); // PROD
 define('PAYTM_MERCHANT_KEY', '_22i8jB4ZN4hCtto'); //Change this constant's value with Merchant key received from Paytm.
 define('PAYTM_MERCHANT_MID', 'WHnxVm73856087122017'); //Change this constant's value with MID (Merchant ID) received from Paytm.
 define('PAYTM_MERCHANT_WEBSITE', 'WEBSTAGING'); //Change this constant's value with Website name received from Paytm.
-define('CALLBACK_URL', 'http://ec2-13-235-42-224.ap-south-1.compute.amazonaws.com/Suven-Elearning/datascience/elearning/payment/paytmresponse.php');
+define('CALLBACK_URL', 'http://datascience.suvenconsultants.com/elearning/payment/paytmresponse.php');
 
 $PAYTM_STATUS_QUERY_NEW_URL='https://securegw-stage.paytm.in/merchant-status/getTxnStatus';
 $PAYTM_TXN_URL='https://securegw-stage.paytm.in/theia/processTransaction';
